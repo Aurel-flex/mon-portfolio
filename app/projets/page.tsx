@@ -20,7 +20,7 @@ export default function ProjetsHub() {
         
         {/* Section Filtres */}
         <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
-          {["Tous", "Professionnel", "Personnel"].map((cat) => (
+          {["Tous", "Professionnels", "Personnels"].map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
