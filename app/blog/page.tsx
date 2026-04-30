@@ -5,8 +5,9 @@ import Link from "next/link";
 // 🌟 On demande à Next.js de vérifier s'il y a de nouveaux articles toutes les heures
 export const revalidate = 3600; 
 
-// Requête GROQ : on cherche tous les documents de type "article"
-const ARTICLES_QUERY = `*[_type == "article"] | order(date desc) {
+// 🛠️ Requête GROQ Corrigée : 
+// On ajoute "&& defined(slug.current)" pour s'assurer que l'article a une URL
+const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current)] | order(date desc) {
   _id,
   title,
   "slug": slug.current,
@@ -15,7 +16,7 @@ const ARTICLES_QUERY = `*[_type == "article"] | order(date desc) {
 }`;
 
 export default async function BlogPage() {
-  // Récupération des données depuis Sanity
+  // Récupération des données filtrées depuis Sanity
   const articles = await client.fetch(ARTICLES_QUERY);
 
   return (
