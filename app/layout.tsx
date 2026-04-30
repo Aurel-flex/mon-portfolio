@@ -4,12 +4,31 @@ import Header from "../components/Header";
 import Breadcrumb from "../components/Breadcrumb"; // 🌟 1. On importe le fil d'Ariane
 import Footer from "../components/Footer";
 import CookieBanner from "../components/CookieBanner";
+
+import { Metadata } from 'next'
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Aurélien Duberville | Webmaster & Intervenant",
-  description: "Création de sites éco-conçus et interventions en école sur la gestion de projet agile et le développement web.",
-};
+export const metadata: Metadata = {
+  title: {
+    default: 'Aurélien Duberville | Développeur Web & Éco-conception',
+    template: '%s | Aurélien Duberville'
+  },
+  description: 'Portfolio d\'Aurélien Duberville, expert en développement web durable, Next.js et architecture Headless CMS. Découvrez mes projets et mes articles sur le numérique responsable.',
+  keywords: ['Développeur Web', 'Éco-conception', 'Next.js', 'Portfolio', 'Numérique responsable'],
+  authors: [{ name: 'Aurélien Duberville' }],
+  openGraph: {
+    title: 'Aurélien Duberville | Développeur Web',
+    description: 'Expert en développement web durable et Next.js.',
+    url: 'https://aurelienduberville.fr',
+    siteName: 'Aurélien Duberville Portfolio',
+    locale: 'fr_FR',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
+}
 
 export default function RootLayout({
   children,

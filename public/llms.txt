@@ -1,0 +1,13 @@
+# Aurélien Duberville - Portfolio & Blog
+
+## Description
+Portfolio de développeur web spécialisé en éco-conception et technologies modernes (Next.js, Sanity, TypeScript).
+
+## Sections principales
+- Blog (/blog) : Articles sur le développement durable et la technique.
+- Projets : Études de cas de réalisations web.
+
+## Stack Technique
+- Frontend: Next.js (App Router)
+- CMS: Sanity.io (Headless)
+- Style: Tailwind CSS
