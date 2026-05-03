@@ -20,7 +20,7 @@ export default function MentionsLegales() {
             <ul className="list-disc list-inside space-y-1 ml-4">
               <li><strong>Nom et Prénom :</strong> Aurélien Duberville</li>
               <li><strong>Adresse :</strong> 22 rue Primo Lévi, France</li>
-              <li><strong>Email :</strong> <a href="mailto:contact@aurelienduberville.fr" className="text-brand-light dark:text-brand-dark hover:underline">contact@aurelienduberville.fr</a></li>
+              <li><strong>Email :</strong> <a aria-label="Lien vers mon adresse email" href="mailto:contact@aurelienduberville.fr" className="text-brand-light dark:text-brand-dark hover:underline">contact@aurelienduberville.fr</a></li>
               <li><strong>Directeur de la publication :</strong> Aurélien Duberville</li>
             </ul>
           </section>
@@ -34,7 +34,7 @@ export default function MentionsLegales() {
             <ul className="list-disc list-inside space-y-1 ml-4">
               <li><strong>Nom de l'hébergeur :</strong> Hostinger International Ltd.</li>
               <li><strong>Adresse :</strong> 61 Lordou Vironos Street, 6023 Larnaca, Chypre</li>
-              <li><strong>Site web :</strong> <a href="https://www.hostinger.fr" target="_blank" rel="noopener noreferrer" className="text-brand-light dark:text-brand-dark hover:underline">www.hostinger.fr</a></li>
+              <li><strong>Site web :</strong> <a aria-label="Lien vers le site web de l'hébergeur" href="https://www.hostinger.fr" target="_blank" rel="noopener noreferrer" className="text-brand-light dark:text-brand-dark hover:underline">www.hostinger.fr</a></li>
             </ul>
           </section>
 

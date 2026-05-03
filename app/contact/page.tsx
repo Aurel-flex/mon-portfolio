@@ -65,7 +65,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email</h3>
-                  <a href="mailto:contact@aurelienduberville.fr" className="text-gray-600 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors">
+                  <a aria-label="Lien vers mon adresse email" href="mailto:contact@aurelienduberville.fr" className="text-gray-600 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors">
                     contact@aurelienduberville.fr
                   </a>
                 </div>
@@ -80,7 +80,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">LinkedIn</h3>
-                  <a href="https://www.linkedin.com/in/aur%C3%A9lien-d-64276b152/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors">
+                  <a aria-label="Lien vers mon profil LinkedIn" href="https://www.linkedin.com/in/aur%C3%A9lien-d-64276b152/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors">
                     Aurélien Duberville
                   </a>
                 </div>
@@ -122,6 +122,7 @@ export default function Contact() {
                   Merci pour votre message. Je vous répondrai dans les plus brefs délais.
                 </p>
                 <button 
+                  aria-label="Envoyer un autre message"
                   onClick={() => setIsSuccess(false)}
                   className="text-brand-light dark:text-brand-dark font-bold hover:underline focus:outline-none focus:ring-2 focus:ring-brand-light/50 rounded px-2 py-1"
                 >
@@ -191,6 +192,7 @@ export default function Contact() {
 
                 {/* Bouton Envoyer */}
                 <button 
+                aria-label="Envoyer le message"
                   type="submit" 
                   disabled={isSubmitting}
                   className="w-full bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all focus:outline-none focus:ring-4 focus:ring-brand-light/50 disabled:opacity-70 disabled:cursor-not-allowed mt-2 flex justify-center items-center gap-2"

@@ -22,6 +22,7 @@ export default function ProjetsHub() {
         <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
           {["Tous", "Professionnels", "Personnels"].map((cat) => (
             <button
+            aria-label={`Filtrer par ${cat}`}
               key={cat}
               onClick={() => setFilter(cat)}
               className={`px-6 py-2 rounded-full border-2 transition-all shrink-0 ${
@@ -48,6 +49,7 @@ export default function ProjetsHub() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* 🌟 LE FILTRE VIOLET : Il disparaît (opacity-0) quand on survole (group-hover) */}

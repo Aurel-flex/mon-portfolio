@@ -28,7 +28,12 @@ export const metadata: Metadata = {
     follow: true,
   }
 }
-
+// ✅ Ajoute "preload: false" dans les options de la police
+const monFont = Inter({ 
+  subsets: ["latin"],
+  display: "swap",
+  preload: false, // <-- Cette ligne supprime l'avertissement de la console
+});
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -10,6 +10,7 @@ export default function Home() {
           src="/aurelien-photo.webp"
           alt="Portrait de Aurélien Duberville"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           /* 🌟 Ajout de 'object-top' pour faire descendre l'image et voir le haut de la tête */
           className="object-cover object-[center_20%]" 
           priority 

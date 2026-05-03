@@ -33,7 +33,7 @@ const ptComponents = {
   },
   marks: {
     link: ({ children, value }: any) => (
-      <a href={value.href} className="text-brand-light dark:text-brand-dark underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity">
+      <a aria-label={`Lien vers ${children}`} href={value.href} className="text-brand-light dark:text-brand-dark underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity">
         {children}
       </a>
     ),
@@ -78,6 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               src={urlFor(article.mainImage).url()}
               alt={article.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
               priority // Charge l'image en priorité pour le SEO
             />

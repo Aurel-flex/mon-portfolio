@@ -68,12 +68,14 @@ export default function CookieBanner() {
 
       <div className="flex flex-wrap sm:flex-nowrap gap-3 shrink-0 w-full md:w-auto">
         <button 
+          aria-label="Refuser tous les cookies"
           onClick={() => handleConsent(false)} 
           className="flex-1 md:flex-none px-6 py-2.5 rounded-lg border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800"
         >
           Tout refuser
         </button>
         <button 
+          aria-label="Accepter tous les cookies"
           onClick={() => handleConsent(true)} 
           className="flex-1 md:flex-none px-6 py-2.5 rounded-lg bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50"
         >
