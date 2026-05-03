@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'Aurélien Duberville | Webmaster & Éco-conception',
     template: '%s | Aurélien Duberville'
   },
-  description: 'Portfolio d\'Aurélien Duberville, expert en développement web durable, Next.js et architecture Headless CMS. Découvrez mes projets et mes articles sur le numérique responsable.',
+  description: 'Webmaster et intervenant spécialisé en accessibilité, gestion de projet agile et éco-conception. Découvrez mon portfolio et mes articles .',
   keywords: ['Webmaster', 'Éco-conception', 'Next.js', 'Portfolio', 'Numérique responsable'],
   authors: [{ name: 'Aurélien Duberville' }],
   openGraph: {
