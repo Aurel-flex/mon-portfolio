@@ -59,8 +59,7 @@ export default function CookieBanner() {
   return (
     <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4 md:p-6 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-6 animate-fade-in-up">
       
-      <div className="text-sm text-gray-700 dark:text-gray-300 max-w-4xl leading-relaxed">
-        <p className="font-bold text-base mb-1 text-gray-900 dark:text-gray-100">🍪 Gestion des cookies</p>
+<div className="text-sm text-gray-900 dark:text-gray-100 max-w-4xl leading-relaxed">        <p className="font-bold text-base mb-1 text-gray-900 dark:text-gray-100">🍪 Gestion des cookies</p>
         Nous utilisons des cookies pour analyser notre trafic et améliorer votre expérience. 
         Conformément aux recommandations de la CNIL, votre choix sera conservé pendant 6 mois. 
         Vous pouvez en savoir plus sur notre page de <Link href="/mentions-legales" className="underline hover:text-brand-light dark:hover:text-brand-dark transition-colors">Politique de confidentialité</Link>.
