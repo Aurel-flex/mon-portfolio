@@ -13,12 +13,22 @@ export default function Contact() {
 
     const formData = new FormData(e.currentTarget);
     
+    // Ton accès Web3Forms
     formData.append("access_key", "66b6d4e6-3cc4-4325-99f3-11c203f69b82");
+
+    // ✅ Correction pour la production : Conversion en objet classique puis en JSON
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          // ✅ Ajout des en-têtes stricts requis par le serveur en production
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: json,
       });
 
       const data = await response.json();
@@ -133,6 +143,14 @@ export default function Contact() {
               
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 
+                {/* ✅ Champ Honeypot (Captcha invisible pour piéger les robots) */}
+                <input 
+                  type="checkbox" 
+                  name="botcheck" 
+                  className="hidden" 
+                  style={{ display: 'none' }} 
+                />
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Champ Nom */}
                   <div className="flex flex-col gap-2">
@@ -192,7 +210,7 @@ export default function Contact() {
 
                 {/* Bouton Envoyer */}
                 <button 
-                aria-label="Envoyer le message"
+                  aria-label="Envoyer le message"
                   type="submit" 
                   disabled={isSubmitting}
                   className="w-full bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all focus:outline-none focus:ring-4 focus:ring-brand-light/50 disabled:opacity-70 disabled:cursor-not-allowed mt-2 flex justify-center items-center gap-2"
