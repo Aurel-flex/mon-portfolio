@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/admin/', // On ne veut pas indexer ton interface Sanity Studio
+      disallow: ['/admin/', '/mentions-legales/'] // On ne veut pas indexer ton interface Sanity Studio
     },
     sitemap: 'https://aurelienduberville.fr/sitemap.xml',
   }

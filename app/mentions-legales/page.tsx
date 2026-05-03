@@ -1,6 +1,13 @@
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
-
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Mentions Légales | Aurélien Duberville',
+  robots: {
+    index: false, // Empêche l'apparition dans les résultats de recherche
+    follow: false, // Empêche les robots de suivre les liens sur cette page
+  },
+};
 export default function MentionsLegales() {
   return (
     <main className="max-w-4xl mx-auto w-full px-6 pt-12 md:pt-16 pb-24">
