@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aurélien Duberville | Webmaster & Éco-conception',
+    default: 'Aurélien Duberville | Webmaster & Intervenant',
     template: '%s | Aurélien Duberville'
   },
   description: 'Webmaster et intervenant spécialisé en accessibilité, gestion de projet agile et éco-conception. Découvrez mon portfolio et mes articles .',
