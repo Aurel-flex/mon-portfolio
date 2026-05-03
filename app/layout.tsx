@@ -26,7 +26,10 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-  }
+  },
+  verification: {
+    google: 'jfF__9QqBRraPjOSxVe2SYujJt3scbAGYsWn7YMFNvk',
+  },
 }
 // ✅ Ajoute "preload: false" dans les options de la police
 const monFont = Inter({ 
