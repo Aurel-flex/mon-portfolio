@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     default: 'Aurélien Duberville | Webmaster & Intervenant',
     template: '%s | Aurélien Duberville'
   },
+  icons: {
+    icon: '/icon.png', // Le chemin vers ton image
+    shortcut: '/icon.png',
+    apple: '/icon.png', // Très utile pour les iPhone/iPad
+  },
   description: 'Webmaster et intervenant spécialisé en accessibilité, gestion de projet agile et éco-conception. Découvrez mon portfolio et mes articles.',
   keywords: ['Webmaster', 'Éco-conception', 'Next.js', 'Portfolio', 'Numérique responsable'],
   authors: [{ name: 'Aurélien Duberville' }],
@@ -38,6 +43,7 @@ export const metadata: Metadata = {
         alt: 'Portrait de Aurélien Duberville',
       },
     ],
+    
   },
   
   // ✅ Ajout de ta photo pour Twitter / X
