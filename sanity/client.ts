@@ -1,6 +1,5 @@
 import { createClient } from "next-sanity";
-import imageUrlBuilder from '@sanity/image-url';
-
+import { createImageUrlBuilder } from '@sanity/image-url'
 export const client = createClient({
   projectId: "i9h6rp94",
   dataset: "production",
@@ -9,8 +8,7 @@ export const client = createClient({
 });
 
 // 🌟 Ce builder permet de transformer les références d'images Sanity en URLs utilisables
-const builder = imageUrlBuilder(client);
-
+const builder = createImageUrlBuilder(client)
 export function urlFor(source: any) {
   return builder.image(source);
 }

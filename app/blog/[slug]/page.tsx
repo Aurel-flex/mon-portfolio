@@ -1,20 +1,14 @@
-import { client, urlFor } from "@/sanity/client";
+import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image"; // Import pour l'optimisation Next.js
+import Image from "next/image"; 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  // On ajoute "mainImage" à notre requête GROQ
-  const query = `*[_type == "article" && slug.current == $slug][0] {
-    title,
-    content,
-    date,
-    excerpt,
-    mainImage 
-  }`;
+  
+  // 🌟 CORRECTION 1 : Requête allégée et propre pour le SEO
   const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]{title, excerpt}`, { slug });
   
   if (!article) return { title: "Article non trouvé" };
@@ -24,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: article.excerpt,
   };
 }
-// 🌟 On définit comment le texte de Sanity doit être affiché en HTML
+
 const ptComponents = {
   block: {
     h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-gray-100">{children}</h2>,
@@ -42,21 +36,20 @@ const ptComponents = {
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   
-  // 🌟 ÉTAPE 1 : On attend que les paramètres de l'URL soient disponibles
   const { slug } = await params;
 
-  // 🌟 ÉTAPE 2 : On définit la requête GROQ
+  // 🌟 CORRECTION 2 : On ajoute la récupération de l'image (URL et Alt) dans la requête principale
   const query = `*[_type == "article" && slug.current == $slug][0] {
     title,
     content,
     date,
-    excerpt
+    excerpt,
+    "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt
   }`;
 
-  // 🌟 ÉTAPE 3 : On envoie la requête en passant BIEN l'objet { slug } en deuxième paramètre
   const article = await client.fetch(query, { slug });
 
-  // Si l'article n'existe pas, on affiche une erreur 404
   if (!article) {
     notFound();
   }
@@ -71,16 +64,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </svg>
           Retour au blog
         </Link>
-        {/* 🌟 Affichage de l'image de couverture */}
-        {article.mainImage && (
+        
+        {/* 🌟 CORRECTION 3 : Affichage de l'image avec les nouvelles variables */}
+        {article.imageUrl && (
           <div className="relative w-full h-[400px] mb-12 rounded-3xl overflow-hidden shadow-lg">
             <Image
-              src={urlFor(article.mainImage).url()}
-              alt={article.title}
+              src={article.imageUrl}
+              alt={article.imageAlt || `Image de couverture : ${article.title}`}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, 800px"
               className="object-cover"
-              priority // Charge l'image en priorité pour le SEO
+              priority // Charge l'image en priorité pour le SEO (au-dessus de la ligne de flottaison)
             />
           </div>
         )}
@@ -95,12 +89,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </p>
         </header>
 
-        {/* Contenu principal (traduit par PortableText) */}
+        {/* Contenu principal */}
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <PortableText value={article.content} components={ptComponents} />
         </div>
       </FadeIn>
     </article>
   );
-  
 }

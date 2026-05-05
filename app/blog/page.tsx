@@ -13,13 +13,13 @@ const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current)] | order(d
   excerpt,
   date,
   // 🌟 2. On récupère l'URL de l'image et le texte alternatif
-  "imageUrl": image.asset->url,
-  "imageAlt": image.alt
+  "imageUrl": mainImage.asset->url,
+  "imageAlt": mainImage.alt
 }`;
 
 export default async function BlogPage() {
   const articles = await client.fetch(ARTICLES_QUERY);
-
+console.log("🔍 DONNÉES SANITY :", JSON.stringify(articles, null, 2));
   return (
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
       <FadeIn>
