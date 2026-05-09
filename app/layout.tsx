@@ -69,12 +69,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth" data-scroll-behavior="smooth">
+    <html lang="fr" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body 
-        // Utilisation propre de la police fusionnée
         className={`${inter.className} antialiased min-h-screen flex flex-col transition-colors duration-300`}
-        suppressHydrationWarning
       >
+        {/* 🌟 2. Le script d'initialisation du thème ajouté ici */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+
         <Header />
         <Breadcrumb /> {/* 🌟 2. On l'affiche ici, juste sous le menu ! */}
         

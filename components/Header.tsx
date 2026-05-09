@@ -10,9 +10,13 @@ export default function Header() {
   
   const pathname = usePathname();
 
+
   useEffect(() => {
+    // On vérifie simplement si le script du layout a mis la classe "dark"
     if (document.documentElement.classList.contains("dark")) {
       setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
     }
   }, []);
 
