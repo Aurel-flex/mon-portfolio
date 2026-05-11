@@ -14,6 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.aurelienduberville.fr'),
   title: {
     default: 'Aurélien Duberville | Webmaster & Intervenant',
     template: '%s | Aurélien Duberville'
