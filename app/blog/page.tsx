@@ -5,7 +5,7 @@ import Image from "next/image"; // 🌟 1. On importe le composant Image optimis
 
 export const revalidate = 3600; 
 
-// 🛠️ Requête GROQ mise à jour
+// 🛠️ Requête GROQ mise à jour (le tri est géré ici avec order(date desc))
 const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current)] | order(date desc) {
   _id,
   title,
@@ -17,9 +17,20 @@ const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current)] | order(d
   "imageAlt": mainImage.alt
 }`;
 
+// 🌟 AJOUT : Fonction pour formater la date proprement en français
+const formatDate = (dateString: string) => {
+  if (!dateString) return null;
+  return new Date(dateString).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
 export default async function BlogPage() {
   const articles = await client.fetch(ARTICLES_QUERY);
-console.log("🔍 DONNÉES SANITY :", JSON.stringify(articles, null, 2));
+  console.log("🔍 DONNÉES SANITY :", JSON.stringify(articles, null, 2));
+  
   return (
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
       <FadeIn>
@@ -55,9 +66,18 @@ console.log("🔍 DONNÉES SANITY :", JSON.stringify(articles, null, 2));
 
               {/* Contenu texte de la carte */}
               <div className="p-8 flex flex-col grow">
-                <span className="text-sm font-medium text-brand-light dark:text-brand-dark mb-3 uppercase tracking-wider">
-                  Article
-                </span>
+                {/* 🌟 AJOUT : En-tête de carte avec Badge + Date */}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-sm font-medium text-brand-light dark:text-brand-dark uppercase tracking-wider bg-brand-light/10 dark:bg-brand-dark/10 px-3 py-1 rounded-full">
+                    Article
+                  </span>
+                  {article.date && (
+                    <time dateTime={article.date} className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                      {formatDate(article.date)}
+                    </time>
+                  )}
+                </div>
+
                 <h2 className="text-2xl font-bold mb-4 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors">
                   {article.title}
                 </h2>

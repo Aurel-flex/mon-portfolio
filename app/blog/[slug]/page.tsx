@@ -8,7 +8,6 @@ import Image from "next/image";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   
-  // 🌟 CORRECTION 1 : Requête allégée et propre pour le SEO
   const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]{title, excerpt}`, { slug });
   
   if (!article) return { title: "Article non trouvé" };
@@ -34,11 +33,20 @@ const ptComponents = {
   },
 };
 
+// 🌟 AJOUT : Fonction pour formater la date proprement en français
+const formatDate = (dateString: string) => {
+  if (!dateString) return null;
+  return new Date(dateString).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   
   const { slug } = await params;
 
-  // 🌟 CORRECTION 2 : On ajoute la récupération de l'image (URL et Alt) dans la requête principale
   const query = `*[_type == "article" && slug.current == $slug][0] {
     title,
     content,
@@ -65,7 +73,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           Retour au blog
         </Link>
         
-        {/* 🌟 CORRECTION 3 : Affichage de l'image avec les nouvelles variables */}
+        {/* Affichage de l'image avec les nouvelles variables */}
         {article.imageUrl && (
           <div className="relative w-full h-[400px] mb-12 rounded-3xl overflow-hidden shadow-lg">
             <Image
@@ -74,13 +82,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               fill
               sizes="(max-width: 768px) 100vw, 800px"
               className="object-cover"
-              priority // Charge l'image en priorité pour le SEO (au-dessus de la ligne de flottaison)
+              priority 
             />
           </div>
         )}
 
         {/* En-tête de l'article */}
         <header className="mb-12">
+          {/* 🌟 AJOUT : Affichage de la date formatée avec balise sémantique */}
+          {article.date && (
+            <time 
+              dateTime={article.date} 
+              className="text-brand-light dark:text-brand-dark font-bold text-sm uppercase tracking-widest mb-4 block"
+            >
+              Publié le {formatDate(article.date)}
+            </time>
+          )}
+
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
             {article.title}
           </h1>
