@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link"; // 🌟 AJOUT DE L'IMPORT ICI
 
 export default function Home() {
   return (
@@ -11,7 +12,6 @@ export default function Home() {
           alt="Portrait de Aurélien Duberville"
           fill
           sizes="(max-width: 768px) 250px, 210px"
-          /* 🌟 Ajout de 'object-top' pour faire descendre l'image et voir le haut de la tête */
           className="object-cover object-[center_20%]" 
           priority 
         />
@@ -30,14 +30,14 @@ export default function Home() {
       </p>
       
       <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <a href="/a-propos" className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+        {/* 🌟 REMPLACEMENT DES <a href> PAR <Link href> */}
+        <Link href="/a-propos" className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
           Me découvrir
-        </a>
+        </Link>
         
-        <a href="/contact" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+        <Link href="/contact" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
           Me contacter
-
-        </a>
+        </Link>
       </div>
       
     </main>
