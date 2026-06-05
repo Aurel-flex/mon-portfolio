@@ -230,13 +230,14 @@ export default function APropos() {
 
         ) : (
 
-          /* =========================================
+    /* =========================================
              CONTENU DE L'ONGLET "CENTRES D'INTÉRÊT"
              ========================================= */
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <FadeIn>
-              <div className="p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+              {/* 🌟 Ajout de 'h-full' ici */}
+              <div className="h-full p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-14 h-14 bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark rounded-2xl flex items-center justify-center mb-6">
                   {/* Icône Globe / Environnement */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
@@ -251,7 +252,8 @@ export default function APropos() {
             </FadeIn>
 
             <FadeIn>
-              <div className="p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+              {/* 🌟 Ajout de 'h-full' ici */}
+              <div className="h-full p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-14 h-14 bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark rounded-2xl flex items-center justify-center mb-6">
                   {/* Icône Diplôme / Pédagogie */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
@@ -266,7 +268,8 @@ export default function APropos() {
             </FadeIn>
 
             <FadeIn>
-              <div className="p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+              {/* 🌟 Ajout de 'h-full' ici */}
+              <div className="h-full p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-14 h-14 bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark rounded-2xl flex items-center justify-center mb-6">
                   {/* Icône Ordinateur / Code */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
@@ -281,7 +284,8 @@ export default function APropos() {
             </FadeIn>
 
             <FadeIn>
-              <div className="p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+              {/* 🌟 Ajout de 'h-full' ici */}
+              <div className="h-full p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-14 h-14 bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark rounded-2xl flex items-center justify-center mb-6">
                   {/* Icône Carte / Mobilité */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">

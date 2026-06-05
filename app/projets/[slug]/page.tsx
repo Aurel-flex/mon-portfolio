@@ -1,22 +1,19 @@
-import { projects } from "@/data/projects";
+import { projets } from "@/data/projets";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 
-// 🌟 1. On ajoute "async" et on indique que params est une "Promise"
 export default async function ProjetDetail({ params }: { params: Promise<{ slug: string }> }) {
   
-  // 🌟 2. On "attend" (await) que Next.js décode l'URL pour récupérer le slug
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
 
-  // On cherche le projet
-  const project = projects.find((p) => p.slug === slug);
+  const project = projets.find((p) => p.slug === slug);
 
   if (!project) notFound();
 
-  const otherProjects = projects.filter(p => p.slug !== slug).slice(0, 2);
+  const otherprojets = projets.filter(p => p.slug !== slug).slice(0, 2);
 
   return (
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
@@ -67,7 +64,6 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
           
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-               {/* 🌟 Remplacement de l'emoji par une icône SVG stylisée */}
                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -90,11 +86,32 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
               </div>
             </div>
 
-            {project.link ? (
+          {/* --- 🌟 DÉBUT DE LA TRIPLE CONDITION CORRIGÉE --- */}
+            {project.links && project.links.length > 0 ? (
+              // 1. S'il y a plusieurs liens (Le Kokon)
+              <div className="flex flex-col gap-3">
+                {project.links.map((lien, index) => (
+                  <a 
+                    key={index}
+                    aria-label={`Voir le lien : ${lien.label}`}
+                    href={lien.url} 
+                    target="_blank" // 🌟 On force le nouvel onglet pour éviter le bug d'animation
+                    rel="noopener noreferrer"
+                    className="flex justify-center items-center gap-2 w-full bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-all hover:scale-[1.02] shadow-md"
+                  >
+                    {lien.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            ) : project.link ? (
+              // 2. Sinon, s'il y a un lien unique (Tous les autres projets)
               <a 
-              aria-label="Voir le projet"
+                aria-label="Voir le projet"
                 href={project.link} 
-                target="_blank" 
+                target="_blank" // 🌟 On force le nouvel onglet ici aussi
                 rel="noopener noreferrer"
                 className="flex justify-center items-center gap-2 w-full bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-all hover:scale-[1.02] shadow-md"
               >
@@ -104,8 +121,11 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
                 </svg>
               </a>
             ) : (
+              // 3. S'il n'y a aucun lien
               <p className="text-sm italic text-gray-500 text-center">Ce projet est un outil interne non accessible au public.</p>
             )}
+            {/* --- FIN DE LA TRIPLE CONDITION --- */}
+
           </div>
 
         </div>
@@ -116,7 +136,7 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
         <div>
           <h3 className="text-2xl font-bold mb-8">Continuer l'exploration</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {otherProjects.map(op => (
+            {otherprojets.map(op => (
               <Link key={op.id} href={`/projets/${op.slug}`} className="group p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-brand-light dark:hover:border-brand-dark transition-all shadow-sm hover:shadow-md">
                 <p className="text-sm text-brand-light dark:text-brand-dark font-medium mb-2">{op.category}</p>
                 <h4 className="font-bold text-xl group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors flex items-center justify-between">

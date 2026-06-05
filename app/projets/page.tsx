@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image"; // 🌟 Import de l'image
-import { projects } from "@/data/projects";
+import { projets } from "@/data/projets";
 import FadeIn from "@/components/FadeIn";
 
 export default function ProjetsHub() {
   const [filter, setFilter] = useState("Tous");
 
-  const filteredProjects = projects.filter(p => 
+  const filteredprojets = projets.filter(p => 
     filter === "Tous" ? true : p.category === filter
   );
 
@@ -39,7 +39,7 @@ export default function ProjetsHub() {
 
       {/* Grille de projets */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {filteredProjects.map((project) => (
+        {filteredprojets.map((project) => (
           <FadeIn key={project.id}>
             {/* Le "group" permet d'animer les enfants quand on survole la carte entière */}
             <Link href={`/projets/${project.slug}`} className="group block bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all">
