@@ -262,7 +262,7 @@ export default function APropos() {
                 </div>
                 <h3 className="text-xl font-bold mb-3">Pédagogie & Transmission</h3>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Ancien assistant numérique, j'aime vulgariser des concepts complexes. La transmission est pour moi le prolongement naturel de l'expertise technique.
+                  Assistant numérique, j'aime vulgariser des concepts complexes. La transmission est pour moi le prolongement naturel de l'expertise technique.
                 </p>
               </div>
             </FadeIn>
