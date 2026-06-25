@@ -1,13 +1,26 @@
 # Aurélien Duberville - Portfolio & Blog
 
 ## Description
-Portfolio de webmaster spécialisé en éco-conception et technologies modernes (Next.js, Sanity, TypeScript).
+Portfolio et blog d'un webmaster et intervenant pédagogique spécialisé en éco-conception, accessibilité numérique (a11y) et technologies modernes.
 
-## Sections principales
-- Blog (/blog) : Articles sur le développement durable et la technique.
-- Projets : Études de cas de réalisations web.
+## Liens et Sections principales
+- Accueil : https://www.aurelienduberville.fr/
+- À propos : https://www.aurelienduberville.fr/a-propos
+- Projets & Réalisations : https://www.aurelienduberville.fr/projets
+- Blog & Pensées : https://www.aurelienduberville.fr/blog
+- Contact : https://www.aurelienduberville.fr/contact
+
+## Architecture des Projets Statiques (Hébergement Local)
+- Le Kokon (Landing Page) : https://www.aurelienduberville.fr/projets/Kokon/index.html
+- Le Kokon (Teaser) : https://www.aurelienduberville.fr/projets/Kokon/teasing/index.html
 
 ## Stack Technique
-- Frontend: Next.js (App Router)
-- CMS: Sanity.io (Headless)
-- Style: Tailwind CSS
+- Frontend : Next.js (App Router, Static Generation)
+- CMS : Sanity.io (Headless, Portable Text)
+- Style : Tailwind CSS (Mobile-First, Dark/Light Mode natif)
+- Déploiement & Routage : Vercel / DNS Hostinger
+
+## Philosophie de développement
+- Éco-conception web (Sobriété numérique, architectures Serverless et légères)
+- Accessibilité numérique (HTML sémantique, respect des normes WCAG/RGAA)
+- Gestion de projet agile (Scrum, approche MVP)
