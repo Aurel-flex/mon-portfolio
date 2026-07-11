@@ -4,15 +4,15 @@
 Portfolio et blog d'un webmaster et intervenant pédagogique spécialisé en éco-conception, accessibilité numérique (a11y) et technologies modernes.
 
 ## Liens et Sections principales
-- Accueil : https://www.aurelienduberville.fr/
-- À propos : https://www.aurelienduberville.fr/a-propos
-- Projets & Réalisations : https://www.aurelienduberville.fr/projets
-- Blog & Pensées : https://www.aurelienduberville.fr/blog
-- Contact : https://www.aurelienduberville.fr/contact
+- [Accueil](https://www.aurelienduberville.fr/)
+- [À propos](https://www.aurelienduberville.fr/a-propos)
+- [Projets & Réalisations](https://www.aurelienduberville.fr/projets)
+- [Blog & Pensées](https://www.aurelienduberville.fr/blog)
+- [Contact](https://www.aurelienduberville.fr/contact)
 
 ## Architecture des Projets Statiques (Hébergement Local)
-- Le Kokon (Landing Page) : https://www.aurelienduberville.fr/projets/Kokon/index.html
-- Le Kokon (Teaser) : https://www.aurelienduberville.fr/projets/Kokon/teasing/index.html
+- [Le Kokon (Landing Page)](https://www.aurelienduberville.fr/projets/Kokon/index.html)
+- [Le Kokon (Teaser)](https://www.aurelienduberville.fr/projets/Kokon/teasing/index.html)
 
 ## Stack Technique
 - Frontend : Next.js (App Router, Static Generation)
