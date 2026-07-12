@@ -10,7 +10,6 @@ export default function Header() {
   
   const pathname = usePathname();
 
-
   useEffect(() => {
     // On vérifie simplement si le script du layout a mis la classe "dark"
     if (document.documentElement.classList.contains("dark")) {
@@ -71,9 +70,8 @@ export default function Header() {
         </nav>
 
         {/* Boutons Mobile */}
-        <div className="flex items-center gap-4 md:hidden z-40">
-          
-          {/* Bouton Dark Mode Mobile */}
+        {/* J'ai réduit le gap-4 à gap-3 pour que les 3 éléments s'intègrent bien sur les petits écrans */}
+<div className="flex items-center gap-3 md:hidden relative z-50">          {/* Bouton Dark Mode Mobile */}
           <button 
             onClick={toggleTheme} 
             className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 focus:outline-none ${!isDarkMode ? 'bg-brand-light' : 'bg-gray-700'}`}
@@ -88,6 +86,18 @@ export default function Header() {
             </span>
           </button>
 
+          {/* 🌟 NOUVEAU BOUTON DEVIS MOBILE */}
+          {/* Il ne s'affiche que si nous ne sommes pas sur la page devis */}
+          {pathname !== "/devis" && (
+            <Link 
+              href="/devis"
+              className="bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 text-sm font-bold px-4 py-1.5 rounded-full hover:scale-105 transition-transform"
+            >
+              Devis
+            </Link>
+          )}
+
+          
           {/* Bouton Hamburger Accessible */}
           <button 
             onClick={() => setIsMenuOpen(true)} 

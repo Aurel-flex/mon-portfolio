@@ -11,7 +11,7 @@ export default function Footer() {
         {/* --- Colonne de gauche : Identité & Copyright --- */}
         <div className="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
           <p className="font-bold text-gray-900 dark:text-gray-100 text-lg">
-            Aurélien Duberville
+           <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
             Création de sites web éco-conçus & Interventions pédagogiques en école.

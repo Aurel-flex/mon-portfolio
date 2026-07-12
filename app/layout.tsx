@@ -5,7 +5,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import Footer from "../components/Footer";
 import CookieBanner from "../components/CookieBanner";
 import { Metadata } from 'next';
-
+import FloatingDevisButton from "@/components/FloatingDevisButton";
 // ✅ Configuration unique et optimisée de la police
 const inter = Inter({ 
   subsets: ["latin"],
@@ -72,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body 
+        suppressHydrationWarning 
         className={`${inter.className} antialiased min-h-screen flex flex-col transition-colors duration-300`}
       >
         {/* 🌟 2. Le script d'initialisation du thème ajouté ici */}
@@ -95,6 +96,7 @@ export default function RootLayout({
         <div className="grow">
           {children}
         </div>
+        <FloatingDevisButton />
         <Footer />
         <CookieBanner />
       </body>

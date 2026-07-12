@@ -18,7 +18,7 @@ export default function Home() {
       </div>
       
       <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center tracking-tight">
-        Aurélien Duberville
+        <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
       </h1>
       
       <h2 className="text-2xl text-brand-light dark:text-brand-dark mb-8 font-medium text-center">
@@ -31,11 +31,12 @@ export default function Home() {
       
       <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
         {/* 🌟 REMPLACEMENT DES <a href> PAR <Link href> */}
-        <Link href="/a-propos" className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+        
+        <Link href="/a-propos" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
           Me découvrir
         </Link>
         
-        <Link href="/contact" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+        <Link href="/contact"className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center" >
           Me contacter
         </Link>
       </div>

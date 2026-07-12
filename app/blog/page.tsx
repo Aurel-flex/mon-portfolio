@@ -38,7 +38,7 @@ export default async function BlogPage() {
           Mon <span className="text-brand-light dark:text-brand-dark">Blog</span>
         </h1>
         <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
-          Partage d'expériences sur l'éco-conception, le développement web et la gestion de projet.
+          Articles dans lesquels je partage mes réflexions sur l'éco-conception, le développement web et la gestion de projet.
         </p>
       </FadeIn>
 
