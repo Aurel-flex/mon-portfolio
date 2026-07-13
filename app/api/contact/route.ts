@@ -3,34 +3,54 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    
     const { nom, email, sujet, message, captchaToken } = body;
 
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
-
+    
+    if (!captchaToken) {
+      console.error("ERREUR : Le jeton est vide ou manquant !");
+      return NextResponse.json({ success: false, message: "Token manquant." }, { status: 400 });
+    }
+    
     if (!BREVO_API_KEY || !RECAPTCHA_SECRET) {
       throw new Error("Configuration serveur manquante.");
     }
 
-    // 1. Vérification du token auprès de Google
-    const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${RECAPTCHA_SECRET}&response=${captchaToken}`,
-    });
+    // --- DEBUT DU DEBOGAGE GOOGLE ---
+
+// 1. Vérification du token auprès de Google
+// On utilise URLSearchParams pour encoder proprement le jeton géant
+const params = new URLSearchParams();
+params.append("secret", RECAPTCHA_SECRET);
+params.append("response", captchaToken);
+
+const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: params.toString(), // L'encodage parfait pour Google
+});
     
     const verifyRes = await verifyReq.json();
-    
+
     if (!verifyRes.success) {
-      return NextResponse.json({ success: false, message: "Validation reCAPTCHA échouée." }, { status: 400 });
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: "Validation reCAPTCHA échouée.",
+          googleError: verifyRes["error-codes"] // On capture l'erreur exacte ici
+        }, 
+        { status: 400 }
+      );
     }
+    // --- FIN DU DEBOGAGE GOOGLE ---
 
     // 2. Préparation des e-mails Brevo
     const emailExpediteur = "contact@aurelienduberville.fr";
 
-    // 🌟 NOUVEAU : On transforme les sauts de ligne invisibles en balises HTML <br>
-    // Le "/\n/g" signifie : "Cherche absolument TOUS les sauts de ligne dans le texte"
-    const messageFormate = message.replace(/\n/g, "<br>");
+    // On transforme les sauts de ligne invisibles en balises HTML 
+    const messageFormate = message.replace(/\n/g, "");
 
     // E-mail pour TOI
     const emailForAdmin = {
@@ -38,19 +58,18 @@ export async function POST(request: Request) {
       to: [{ email: emailExpediteur, name: "Aurélien Duberville" }],
       subject: `Nouveau message de contact : ${sujet}`,
       htmlContent: `
-        <div style="font-family: sans-serif; color: #333; line-height: 1.6;">
-          <h2 style="color: #000;">Nouveau message depuis le formulaire de contact</h2>
-          <ul style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; list-style-type: none;">
-            <li style="margin-bottom: 10px;"><strong>Nom :</strong> ${nom}</li>
-            <li style="margin-bottom: 10px;"><strong>Email :</strong> ${email}</li>
-            <li><strong>Sujet :</strong> ${sujet}</li>
-          </ul>
-          <h3 style="margin-top: 24px;">Message :</h3>
-          <!-- 🌟 On utilise ici notre message bien formaté -->
-          <div style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; border-left: 4px solid #0056b3;">
-            <p style="margin: 0;">${messageFormate}</p>
-          </div>
-        </div>
+        
+          Nouveau message depuis le formulaire de contact
+          
+            Nom : ${nom}
+            Email : ${email}
+            Sujet : ${sujet}
+          
+          Message :
+          
+            ${messageFormate}
+          
+        
       `,
     };
 
@@ -61,14 +80,14 @@ export async function POST(request: Request) {
       to: [{ email: email }],
       subject: "Votre message a bien été envoyé",
       htmlContent: `
-        <div style="font-family: sans-serif; color: #333; line-height: 1.6;">
-          <p>Bonjour ${nom},</p>
-          <p>Je vous confirme la bonne réception de votre message via mon formulaire de contact.</p>
-          <p>Je vais en prendre connaissance et je reviens vers vous très rapidement.</p>
-          <br/>
-          <p>À bientôt,</p>
-          <p><strong>Aurélien Duberville</strong></p>
-        </div>
+        
+          Bonjour ${nom},
+          Je vous confirme la bonne réception de votre message via mon formulaire de contact.
+          Je vais en prendre connaissance et je reviens vers vous très rapidement.
+          
+          À bientôt,
+          Aurélien Duberville
+        
       `,
     };
 

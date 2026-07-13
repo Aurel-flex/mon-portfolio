@@ -11,11 +11,15 @@ export async function POST(request: Request) {
   if (!BREVO_API_KEY || !RECAPTCHA_SECRET) {
       throw new Error("Configuration serveur manquante (Brevo ou reCAPTCHA).");
     }
-  const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${RECAPTCHA_SECRET}&response=${captchaToken}`,
-    });
+const params = new URLSearchParams();
+params.append("secret", process.env.RECAPTCHA_SECRET_KEY as string);
+params.append("response", captchaToken);
+
+const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: params.toString(), // L'encodage qui fonctionne !
+});
     
     const verifyRes = await verifyReq.json();
     // Vérification du token reCAPTCHA

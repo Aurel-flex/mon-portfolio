@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 // ✅ Ajout des configurations d'images
   images: {
     // On ajoute des tailles plus petites pour que Next.js puisse générer une image proche de 250px
@@ -14,4 +14,4 @@ const nextConfig: NextConfig = {
       ],
   },};
 
-export default nextConfig;
+module.exports = nextConfig;
