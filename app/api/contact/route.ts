@@ -3,69 +3,62 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
     const { nom, email, sujet, message, captchaToken } = body;
 
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
     
+    // Vérification des données requises
     if (!captchaToken) {
-      console.error("ERREUR : Le jeton est vide ou manquant !");
       return NextResponse.json({ success: false, message: "Token manquant." }, { status: 400 });
     }
-    
     if (!BREVO_API_KEY || !RECAPTCHA_SECRET) {
       throw new Error("Configuration serveur manquante.");
     }
 
-    // --- DEBUT DU DEBOGAGE GOOGLE ---
+    // 1. Vérification du token auprès de Google (avec encodage sécurisé)
+    const params = new URLSearchParams();
+    params.append("secret", RECAPTCHA_SECRET);
+    params.append("response", captchaToken);
 
-// 1. Vérification du token auprès de Google
-// On utilise URLSearchParams pour encoder proprement le jeton géant
-const params = new URLSearchParams();
-params.append("secret", RECAPTCHA_SECRET);
-params.append("response", captchaToken);
-
-const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-  method: "POST",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  body: params.toString(), // L'encodage parfait pour Google
-});
+    const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
     
     const verifyRes = await verifyReq.json();
-
+    
     if (!verifyRes.success) {
       return NextResponse.json(
-        { 
-          success: false, 
-          message: "Validation reCAPTCHA échouée.",
-          googleError: verifyRes["error-codes"] // On capture l'erreur exacte ici
-        }, 
+        { success: false, message: "Validation reCAPTCHA échouée." }, 
         { status: 400 }
       );
     }
-    // --- FIN DU DEBOGAGE GOOGLE ---
 
     // 2. Préparation des e-mails Brevo
     const emailExpediteur = "contact@aurelienduberville.fr";
 
-    // On transforme les sauts de ligne invisibles en balises HTML 
-    const messageFormate = message.replace(/\n/g, "");
+    // Amélioration : on capture TOUS les types de sauts de ligne (Windows \r\n et Mac/Linux \n)
+    const messageFormate = message.replace(/\r?\n/g, "");
 
-    // E-mail pour TOI
+    // E-mail pour TOI (L'administrateur)
     const emailForAdmin = {
       sender: { name: "Page Contact", email: emailExpediteur },
       to: [{ email: emailExpediteur, name: "Aurélien Duberville" }],
       subject: `Nouveau message de contact : ${sujet}`,
       htmlContent: `
         
-          Nouveau message depuis le formulaire de contact
+          Nouveau message depuis le formulaire
+          
           
             Nom : ${nom}
             Email : ${email}
             Sujet : ${sujet}
           
+          
           Message :
+          
           
             ${messageFormate}
           
@@ -73,24 +66,34 @@ const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify",
       `,
     };
 
-    // E-mail pour LE CLIENT
-    const emailForClient = {
-      sender: { name: "Aurélien Duberville", email: emailExpediteur },
-      replyTo: { email: emailExpediteur, name: "Aurélien Duberville" },
-      to: [{ email: email }],
-      subject: "Votre message a bien été envoyé",
-      htmlContent: `
-        
-          Bonjour ${nom},
-          Je vous confirme la bonne réception de votre message via mon formulaire de contact.
-          Je vais en prendre connaissance et je reviens vers vous très rapidement.
-          
-          À bientôt,
-          Aurélien Duberville
-        
-      `,
-    };
+// E-mail pour LE CLIENT
+const emailForClient = {
+  sender: { name: "Aurélien Duberville", email: emailExpediteur },
+  replyTo: { email: emailExpediteur, name: "Aurélien Duberville" },
+  to: [{ email: email }],
+  subject: "Votre demande a bien été prise en compte",
+  htmlContent: `
+    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+      <p style="margin-bottom: 15px;">Bonjour,</p>
+      
+      <p style="margin-bottom: 15px;">
+        Je vous confirme la bonne réception de votre demande.<br/>
+        Je vais étudier les détails de votre projet avec attention.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        Je reviens vers vous très rapidement pour discuter de la suite.
+      </p>
+      
+      <p style="margin-top: 30px;">
+        À très bientôt,<br/>
+        <strong>Aurélien Duberville</strong>
+      </p>
+    </div>
+  `,
+};
 
+    // Fonction pour envoyer à Brevo
     const sendBrevoEmail = async (payload: any) => {
       const response = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
@@ -108,7 +111,7 @@ const verifyReq = await fetch("https://www.google.com/recaptcha/api/siteverify",
       return response.json();
     };
 
-    // 3. Envoi simultané des e-mails
+    // 3. Envoi simultané des deux e-mails
     await Promise.all([
       sendBrevoEmail(emailForAdmin),
       sendBrevoEmail(emailForClient)
