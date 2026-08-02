@@ -41,7 +41,7 @@ export default function Header() {
         
         {/* Ton Logo */}
         <div className="font-bold text-2xl text-brand-light dark:text-brand-dark z-40">
-          <Link href="/" onClick={closeMenu}>AD.</Link>
+          <Link href="/" onClick={closeMenu}>A<span className="text-black dark:text-white">urélien</span> D<span className="text-black dark:text-white">.</span></Link>
         </div>
         
         {/* Navigation Bureau */}
@@ -50,9 +50,10 @@ export default function Header() {
           <Link href="/a-propos" className={getLinkClass("/a-propos")}>À propos</Link>
           <Link href="/projets" className={getLinkClass("/projets")}>Projets</Link>
           <Link href="/interventions" className={getLinkClass("/interventions")}>Interventions</Link>
+          <Link href="/tarifs" className={getLinkClass("/tarifs")}>Tarifs</Link>
           <Link href="/blog" className={getLinkClass("/blog")}>Blog</Link>
           <Link href="/contact" className={getLinkClass("/contact")}>Contact</Link>
-          
+
           {/* Bouton Dark Mode Bureau */}
           <button 
             onClick={toggleTheme} 
@@ -148,8 +149,9 @@ export default function Header() {
           <Link href="/a-propos" onClick={closeMenu} className={getLinkClass("/a-propos")}>À propos</Link>
           <Link href="/projets" onClick={closeMenu} className={getLinkClass("/projets")}>Projets</Link>
           <Link href="/interventions" onClick={closeMenu} className={getLinkClass("/interventions")}>Interventions</Link>
+          <Link href="/tarifs" onClick={closeMenu} className={getLinkClass("/tarifs")}>Tarifs</Link>
           <Link href="/blog" onClick={closeMenu} className={getLinkClass("/blog")}>Blog</Link>
-          <Link href="/contact" onClick={closeMenu} className={getLinkClass("/contact")}>Contact</Link>       
+          <Link href="/contact" onClick={closeMenu} className={getLinkClass("/contact")}>Contact</Link>
         </div>
       </nav>
     </header>

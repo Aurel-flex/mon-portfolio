@@ -13,7 +13,7 @@ export default function APropos() {
       {/* --- SECTION 1 : PRÉSENTATION RAPIDE & CV --- */}
       <FadeIn>
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center tracking-tight">
-          À <span className="text-brand-light dark:text-brand-dark">propos</span>
+          À <span className="text-brand-light dark:text-brand-dark">Propos</span>
         </h1>
         
         
