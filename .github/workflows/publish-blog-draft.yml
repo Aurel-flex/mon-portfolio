@@ -1,0 +1,60 @@
+name: Publier brouillon de blog
+
+# Se déclenche quand la routine hebdomadaire dépose un nouvel article dans
+# content/blog-drafts/. Le token Sanity (secret GitHub, jamais visible ailleurs)
+# est utilisé ici pour créer le brouillon dans Sanity. Rien n'est publié sur le
+# site : l'article reste en "drafts." dans Sanity jusqu'à validation manuelle.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/blog-drafts/*.json"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Publier les brouillons en attente dans Sanity
+        id: publish
+        env:
+          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+        run: |
+          set -e
+          mkdir -p content/blog-drafts/published
+          shopt -s nullglob
+          published_any=false
+          failed_any=false
+
+          for file in content/blog-drafts/*.json; do
+            echo "→ Publication de $file"
+            if node scripts/publish-blog-draft.mjs "$file"; then
+              git mv "$file" "content/blog-drafts/published/$(basename "$file")"
+              published_any=true
+            else
+              echo "::error::Échec de la publication de $file"
+              failed_any=true
+            fi
+          done
+
+          echo "published_any=$published_any" >> "$GITHUB_OUTPUT"
+
+          if [ "$published_any" = true ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore: archive les brouillons de blog publiés dans Sanity"
+            git push
+          fi
+
+          if [ "$failed_any" = true ]; then
+            exit 1
+          fi
