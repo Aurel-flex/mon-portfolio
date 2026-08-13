@@ -14,7 +14,7 @@ export default function Footer() {
            <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
-            Consultant numérique indépendant — Stratégie, création et référencement (SEO) de sites web.
+            Consultant numérique indépendant : Stratégie, création et référencement (SEO) de sites web.
           </p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
             © {currentYear} - Tous droits réservés.
