@@ -30,7 +30,10 @@ export default function CookieBanner() {
       }
     }
     
-    // Si pas de choix ou choix expiré (> 6 mois), on affiche le bandeau
+    // Si pas de choix ou choix expiré (> 6 mois), on affiche le bandeau.
+    // Nécessite un effect : localStorage (système externe) n'est lisible
+    // qu'après le montage, impossible à connaître pendant le rendu SSR.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShowBanner(true);
   }, []);
 

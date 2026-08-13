@@ -24,40 +24,43 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center w-full px-8 pt-8 md:pt-16 pb-40">
       
-      {/* La section Photo de profil */}
-      <div className="relative w-32 h-32 md:w-48 md:h-48 mb-8 rounded-full overflow-hidden border-4 border-brand-light dark:border-brand-dark shadow-xl shrink-0">
-        <Image
-          src="/aurelien-photo.webp"
-          alt="Portrait de Aurélien Duberville"
-          fill
-          sizes="(max-width: 768px) 250px, 210px"
-          className="object-cover object-[center_20%]" 
-          priority 
-        />
-      </div>
-      
-      <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center tracking-tight">
-        <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
-      </h1>
-      
-      <h2 className="text-2xl text-brand-light dark:text-brand-dark mb-8 font-medium text-center">
-        Webmaster et intervenant pédagogique
-      </h2>
-      
-      <p className="text-center max-w-lg mb-12 text-lg leading-relaxed">
-        Création de sites accessibles et interventions en gestion de projet agile, communication et développement web.
-      </p>
-      
-      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        {/* 🌟 REMPLACEMENT DES <a href> PAR <Link href> */}
-        
-        <Link href="/a-propos" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
-          Me découvrir
-        </Link>
-        
-        <Link href="/contact"className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center" >
-          Me contacter
-        </Link>
+      {/* Hero : photo à gauche, présentation à droite (empilés sur mobile) */}
+      <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-14 max-w-4xl w-full">
+        <div className="flex flex-col items-center mx-auto md:mx-0 shrink-0">
+          <div className="relative w-56 md:w-72 aspect-[4/5] rounded-3xl overflow-hidden border-4 border-brand-light dark:border-brand-dark shadow-xl">
+            <Image
+              src="/aurelien-photo.webp"
+              alt="Portrait de Aurélien Duberville"
+              fill
+              sizes="(max-width: 768px) 224px, 288px"
+              className="object-cover object-[center_20%]"
+              priority
+            />
+          </div>
+          <p className="text-2xl font-bold mt-4 tracking-tight">
+            <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+            Consultant <span className="text-brand-light dark:text-brand-dark">numérique</span> indépendant
+          </h1>
+
+          <p className="max-w-xl mb-8 text-lg md:text-xl leading-relaxed text-gray-600 dark:text-gray-400">
+            Stratégie, création et référencement (SEO et GEO) de site internet : un seul interlocuteur, du début à la fin.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Link href="/a-propos" className="w-full sm:w-auto border-2 border-brand-light dark:border-brand-dark text-brand-light dark:text-brand-dark px-8 py-3 rounded-md font-bold hover:bg-brand-light hover:text-white dark:hover:bg-brand-dark dark:hover:text-gray-900 transition-colors focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+              Me découvrir
+            </Link>
+
+            <Link href="/contact" className="w-full sm:w-auto bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity focus:outline-none focus:ring-4 focus:ring-brand-light/50 dark:focus:ring-brand-dark/50 text-center">
+              Me contacter
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* --- SECTION "COMMENT ÇA SE PASSE" --- */}

@@ -1,9 +1,9 @@
 import { client } from "@/sanity/client";
-import { PortableText } from "@portabletext/react";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image"; 
+import Image from "next/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -18,15 +18,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-const ptComponents = {
+const ptComponents: PortableTextComponents = {
   block: {
-    h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-gray-100">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100">{children}</h3>,
-    normal: ({ children }: any) => <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">{children}</p>,
+    h2: ({ children }) => <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-gray-100">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100">{children}</h3>,
+    normal: ({ children }) => <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">{children}</p>,
   },
   marks: {
-    link: ({ children, value }: any) => (
-      <a aria-label={`Lien vers ${children}`} href={value.href} className="text-brand-light dark:text-brand-dark underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity">
+    link: ({ children, value }) => (
+      <a aria-label={`Lien vers ${children}`} href={value?.href} className="text-brand-light dark:text-brand-dark underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity">
         {children}
       </a>
     ),

@@ -1,11 +1,12 @@
 # Aurélien Duberville - Portfolio & Blog
 
 ## Description
-Portfolio et blog d'un webmaster et intervenant pédagogique spécialisé en éco-conception, accessibilité numérique (a11y) et technologies modernes.
+Portfolio et blog d'un consultant numérique indépendant : stratégie, création et référencement (SEO) de sites web, spécialisé en éco-conception, accessibilité numérique (a11y) et technologies modernes.
 
 ## Liens et Sections principales
 - [Accueil](https://www.aurelienduberville.fr/)
 - [À propos](https://www.aurelienduberville.fr/a-propos)
+- [Tarifs & Prestations](https://www.aurelienduberville.fr/tarifs)
 - [Projets & Réalisations](https://www.aurelienduberville.fr/projets)
 - [Blog & Pensées](https://www.aurelienduberville.fr/blog)
 - [Contact](https://www.aurelienduberville.fr/contact)

@@ -1,5 +1,13 @@
 import { NextResponse } from "next/server";
 
+type BrevoEmailPayload = {
+  sender: { name: string; email: string };
+  to: { email: string; name?: string }[];
+  replyTo?: { email: string; name: string };
+  subject: string;
+  htmlContent: string;
+};
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -88,7 +96,7 @@ const emailForClient = {
 };
 
     // Fonction d'envoi simplifiée
-    const sendBrevoEmail = async (payload: any) => {
+    const sendBrevoEmail = async (payload: BrevoEmailPayload) => {
       const response = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
@@ -109,10 +117,11 @@ const emailForClient = {
 
     return NextResponse.json({ success: true, message: "Emails envoyés avec succès" });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("🔴 ERREUR SERVEUR GLOBALE :", error);
+    const message = error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
-      { success: false, message: "Erreur : " + (error.message || "Erreur inconnue") },
+      { success: false, message: "Erreur : " + message },
       { status: 500 }
     );
   }

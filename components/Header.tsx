@@ -7,16 +7,17 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const pathname = usePathname();
 
   useEffect(() => {
-    // On vérifie simplement si le script du layout a mis la classe "dark"
-    if (document.documentElement.classList.contains("dark")) {
-      setIsDarkMode(true);
-    } else {
-      setIsDarkMode(false);
-    }
+    // Un useState paresseux ne suffit pas ici : sur cette version de Next.js,
+    // la valeur calculée au premier rendu client n'est pas reprise correctement
+    // par l'hydratation des pages statiques (vérifié : le bouton reste figé sur
+    // l'état "clair" même quand la classe "dark" est bien présente). L'effect,
+    // lui, s'exécute de façon fiable après le montage.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
   }, []);
 
   const toggleTheme = () => {
@@ -25,6 +26,10 @@ export default function Header() {
   };
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const themeToggleBg = isDarkMode ? "bg-gray-700" : "bg-brand-light";
+  const themeToggleKnob = isDarkMode ? "translate-x-1" : "translate-x-9";
+  const themeToggleLabel = isDarkMode ? "Passer au thème clair" : "Passer au thème sombre";
 
   const getLinkClass = (path: string) => {
     const baseStyle = "transition-colors hover:text-brand-light dark:hover:text-brand-dark";
@@ -55,16 +60,16 @@ export default function Header() {
           <Link href="/contact" className={getLinkClass("/contact")}>Contact</Link>
 
           {/* Bouton Dark Mode Bureau */}
-          <button 
-            onClick={toggleTheme} 
-            className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 focus:outline-none ${!isDarkMode ? 'bg-brand-light' : 'bg-gray-700'}`} 
-            aria-label={isDarkMode ? "Passer au thème clair" : "Passer au thème sombre"}
+          <button
+            onClick={toggleTheme}
+            className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 focus:outline-none ${themeToggleBg}`}
+            aria-label={themeToggleLabel}
           >
-            <span className={`inline-flex h-6 w-6 transform items-center justify-center rounded-full bg-white transition-transform duration-300 ${!isDarkMode ? 'translate-x-9' : 'translate-x-1'}`}>
-              {!isDarkMode ? (
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-light"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
-              ) : (
+            <span className={`inline-flex h-6 w-6 transform items-center justify-center rounded-full bg-white transition-transform duration-300 ${themeToggleKnob}`}>
+              {isDarkMode ? (
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-gray-800"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+              ) : (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-light"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
               )}
             </span>
           </button>
@@ -73,16 +78,16 @@ export default function Header() {
         {/* Boutons Mobile */}
         {/* J'ai réduit le gap-4 à gap-3 pour que les 3 éléments s'intègrent bien sur les petits écrans */}
 <div className="flex items-center gap-3 md:hidden relative z-50">          {/* Bouton Dark Mode Mobile */}
-          <button 
-            onClick={toggleTheme} 
-            className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 focus:outline-none ${!isDarkMode ? 'bg-brand-light' : 'bg-gray-700'}`}
-            aria-label={isDarkMode ? "Passer au thème clair" : "Passer au thème sombre"}
+          <button
+            onClick={toggleTheme}
+            className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 focus:outline-none ${themeToggleBg}`}
+            aria-label={themeToggleLabel}
           >
-            <span className={`inline-flex h-6 w-6 transform items-center justify-center rounded-full bg-white transition-transform duration-300 ${!isDarkMode ? 'translate-x-9' : 'translate-x-1'}`}>
-              {!isDarkMode ? (
-                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-light"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
-              ) : (
+            <span className={`inline-flex h-6 w-6 transform items-center justify-center rounded-full bg-white transition-transform duration-300 ${themeToggleKnob}`}>
+              {isDarkMode ? (
                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-gray-800"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+              ) : (
+                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-light"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
               )}
             </span>
           </button>

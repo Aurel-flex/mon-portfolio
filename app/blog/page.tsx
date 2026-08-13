@@ -3,7 +3,17 @@ import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import Image from "next/image"; // 🌟 1. On importe le composant Image optimisé
 
-export const revalidate = 3600; 
+export const revalidate = 3600;
+
+type Article = {
+  _id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  imageUrl: string | null;
+  imageAlt: string | null;
+};
 
 // 🛠️ Requête GROQ mise à jour (le tri est géré ici avec order(date desc))
 const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current)] | order(date desc) {
@@ -28,7 +38,7 @@ const formatDate = (dateString: string) => {
 };
 
 export default async function BlogPage() {
-  const articles = await client.fetch(ARTICLES_QUERY);
+  const articles = await client.fetch<Article[]>(ARTICLES_QUERY);
   console.log("🔍 DONNÉES SANITY :", JSON.stringify(articles, null, 2));
   
   return (
@@ -43,7 +53,7 @@ export default async function BlogPage() {
       </FadeIn>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {articles.map((article: any) => (
+        {articles.map((article) => (
           <FadeIn key={article._id}>
             <Link 
               href={`/blog/${article.slug}`}

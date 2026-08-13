@@ -16,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.aurelienduberville.fr'),
   title: {
-    default: 'Aurélien Duberville | Webmaster & Intervenant',
+    default: 'Aurélien Duberville | Consultant numérique indépendant',
     template: '%s | Aurélien Duberville'
   },
   icons: {
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     shortcut: '/icon.png',
     apple: '/icon.png', // Très utile pour les iPhone/iPad
   },
-  description: 'Webmaster et intervenant spécialisé en accessibilité, gestion de projet agile et éco-conception. Découvrez mon portfolio et mes articles.',
-  keywords: ['Webmaster', 'Éco-conception', 'Next.js', 'Portfolio', 'Numérique responsable'],
+  description: 'Consultant numérique indépendant : stratégie, création et référencement (SEO) de votre site web. Un seul interlocuteur, du début à la fin. Découvrez mon portfolio et mes articles.',
+  keywords: ['Consultant numérique indépendant', 'Création de site web', 'Référencement SEO', 'Stratégie digitale', 'Next.js', 'Éco-conception'],
   authors: [{ name: 'Aurélien Duberville' }],
-  
+
   // ✅ Ajout de ta photo pour Facebook, LinkedIn, etc.
   openGraph: {
-    title: 'Aurélien Duberville | Webmaster',
-    description: 'Responsable de projets web éco-conçus, découvrez mon portfolio et mes articles sur le développement durable.',
+    title: 'Aurélien Duberville | Consultant numérique indépendant',
+    description: 'Stratégie, création et référencement (SEO) de votre site web — un seul interlocuteur, du début à la fin.',
     url: 'https://aurelienduberville.fr',
     siteName: 'Aurélien Duberville Portfolio',
     locale: 'fr_FR',
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
         alt: 'Portrait de Aurélien Duberville',
       },
     ],
-    
+
   },
-  
+
   // ✅ Ajout de ta photo pour Twitter / X
   twitter: {
     card: 'summary_large_image',
-    title: 'Aurélien Duberville | Webmaster',
-    description: 'Webmaster et intervenant spécialisé en accessibilité et éco-conception.',
+    title: 'Aurélien Duberville | Consultant numérique indépendant',
+    description: 'Stratégie, création et référencement (SEO) de votre site web — un seul interlocuteur, du début à la fin.',
     images: ['https://aurelienduberville.fr/aurelien-photo.webp'], // Lien vers ta photo
   },
   

@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tarifs & Prestations | Aurélien Duberville",
   description:
-    "Découvrez mes prestations de webmaster indépendant : audit de site, création de site internet, rédaction web SEO et interventions pédagogiques. Devis personnalisé et gratuit.",
+    "Découvrez mes prestations de consultant numérique indépendant : audit de site, création de site internet, référencement SEO et interventions pédagogiques. Devis personnalisé et gratuit.",
 };
 
 type Formule = {

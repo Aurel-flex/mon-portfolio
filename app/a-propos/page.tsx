@@ -33,7 +33,7 @@ export default function APropos() {
               et la <strong className="text-brand-light dark:text-brand-dark">pédagogie</strong>.
             </p>
             <p className="mt-6 font-semibold text-gray-900 dark:text-gray-100">
-              Mon objectif ? Créer des outils digitaux performants tout en transmettant les clés de la tech et de la gestion de projet.
+              Mon objectif ? Créer des sites qui vous conviennent tout en transmettant les clés du numérique et de la gestion de projet.
             </p>
           </div>
         </div>
@@ -110,10 +110,16 @@ export default function APropos() {
                 <FadeIn>
                   <div className="mb-12 ml-10 relative">
                     <span className="absolute flex items-center justify-center w-4 h-4 bg-brand-light dark:bg-brand-dark rounded-full -left-[49px] top-1.5 ring-8 ring-white dark:ring-gray-900"></span>
-                    <h3 className="text-2xl font-bold">Assistant & Formateur Numérique</h3>
+                    <h3 className="text-2xl font-bold">Consultant numérique et Formateur indépendant</h3>
                     <p className="text-brand-light dark:text-brand-dark font-medium mt-1 mb-4">Indépendant • 2 ans</p>
                     
                     <ul className="text-gray-600 dark:text-gray-400 space-y-3 text-lg leading-relaxed">
+                       <li className="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-brand-light dark:text-brand-dark shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <span>Création de sites internet sur mesure pour des particuliers.</span>
+                      </li>
                       <li className="flex items-start gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-brand-light dark:text-brand-dark shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -134,7 +140,7 @@ export default function APropos() {
                 <FadeIn>
                   <div className="mb-12 ml-10 relative">
                     <span className="absolute flex items-center justify-center w-4 h-4 bg-brand-light dark:bg-brand-dark rounded-full -left-[49px] top-1.5 ring-8 ring-white dark:ring-gray-900"></span>
-                    <h3 className="text-2xl font-bold">Chef de Projet Web</h3>
+                    <h3 className="text-2xl font-bold">Chef de Projet numérique</h3>
                     <p className="text-brand-light dark:text-brand-dark font-medium mt-1 mb-4">Agence Reflet Digital • 1 an</p>
                     <ul className="text-gray-600 dark:text-gray-400 space-y-3 text-lg leading-relaxed">
                       <li className="flex items-start gap-3">
@@ -156,7 +162,7 @@ export default function APropos() {
                 <FadeIn>
                   <div className="mb-12 ml-10 relative">
                     <span className="absolute flex items-center justify-center w-4 h-4 bg-brand-light dark:bg-brand-dark rounded-full -left-[49px] top-1.5 ring-8 ring-white dark:ring-gray-900"></span>
-                    <h3 className="text-2xl font-bold">Assistant Product Owner</h3>
+                    <h3 className="text-2xl font-bold">Product Owner | Chef de projet</h3>
                     <p className="text-brand-light dark:text-brand-dark font-medium mt-1 mb-4">Orange (Siège Social) • 3 ans</p>
                     <ul className="text-gray-600 dark:text-gray-400 space-y-3 text-lg leading-relaxed">
                       <li className="flex items-start gap-3">
@@ -191,7 +197,7 @@ export default function APropos() {
                   <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark text-2xl">
                     🎓
                   </span>
-                  Études & Diplômes
+                  Études et Diplômes
                 </h2>
               </FadeIn>
 
@@ -199,7 +205,7 @@ export default function APropos() {
                 <FadeIn>
                   <div className="mb-10 ml-10 relative">
                     <span className="absolute flex items-center justify-center w-4 h-4 bg-brand-light dark:bg-brand-dark rounded-full -left-[49px] top-1.5 ring-8 ring-white dark:ring-gray-900"></span>
-                    <h3 className="text-xl md:text-2xl font-bold leading-tight">Mastère 2 - Communication Digitale & Marketing d'Influence</h3>
+                    <h3 className="text-xl md:text-2xl font-bold leading-tight">Master 2 - Communication Digitale & Marketing d'Influence</h3>
                     <p className="text-brand-light dark:text-brand-dark font-medium mt-1 mb-4">ESG - Ecole Supérieur de Gestion - Strasbourg</p>
                   </div>
                 </FadeIn>
@@ -260,7 +266,7 @@ export default function APropos() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-3">Pédagogie & Transmission</h3>
+                <h3 className="text-xl font-bold mb-3">Pédagogie et Transmission</h3>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                   Assistant numérique, j'aime vulgariser des concepts complexes. La transmission est pour moi le prolongement naturel de l'expertise technique.
                 </p>
