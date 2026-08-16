@@ -41,7 +41,7 @@ export default function APropos() {
         {/* Le bouton de téléchargement du CV */}
         <div className="flex justify-center mb-16">
           <a 
-            href="/CV-Aurelien-Duberville-2026.pdf" 
+            href="/CV_Aurelien_Duberville_Consultant_Numerique.pdf" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 px-8 py-4 rounded-full font-bold hover:opacity-90 transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-brand-light/50 shadow-lg"
