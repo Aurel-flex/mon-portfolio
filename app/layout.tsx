@@ -64,6 +64,28 @@ export const metadata: Metadata = {
   },
 }
 
+// Balisage schema.org (Person + WebSite) : aide Google à identifier le site,
+// rattacher les pages entre elles et proposer des liens annexes (sitelinks)
+// sous le résultat principal dans les pages de recherche.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: "Aurélien Duberville",
+      url: "https://www.aurelienduberville.fr",
+      image: "https://www.aurelienduberville.fr/aurelien-photo.webp",
+      jobTitle: "Consultant numérique indépendant",
+      sameAs: ["https://www.linkedin.com/in/aur%C3%A9lien-d-64276b152/"],
+    },
+    {
+      "@type": "WebSite",
+      name: "Aurélien Duberville",
+      url: "https://www.aurelienduberville.fr",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,10 +93,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body 
-        suppressHydrationWarning 
+      <body
+        suppressHydrationWarning
         className={`${inter.className} antialiased min-h-screen flex flex-col transition-colors duration-300`}
       >
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {/* 🌟 2. Le script d'initialisation du thème ajouté ici */}
         <script
           dangerouslySetInnerHTML={{

@@ -38,7 +38,7 @@ export default function Home() {
             />
           </div>
           <p className="text-2xl font-bold mt-4 tracking-tight">
-            <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>uberville
+            <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>.
           </p>
         </div>
 
