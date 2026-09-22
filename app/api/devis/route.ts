@@ -11,7 +11,7 @@ type BrevoEmailPayload = {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { servicePrincipal, sousChoix, email, message, captchaToken } = body;
+    const { servicePrincipal, sousChoix, typeDemande, email, message, captchaToken } = body;
 
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
@@ -47,21 +47,30 @@ export async function POST(request: Request) {
     const messageFormate = message ? message.replace(/\r?\n/g, "") : "";
     const emailExpediteur = "contact@aurelienduberville.fr";
 
+    // Libellé lisible du type de demande, pour le tri rapide des emails entrants
+    const TYPE_DEMANDE_LABELS: Record<string, string> = {
+      artisan: "Site internet (Indépendant / Artisan)",
+      formation: "Intervention pédagogique (Cours / Formation / Jury)",
+      autre: "Autre demande",
+    };
+    const typeDemandeLabel = TYPE_DEMANDE_LABELS[typeDemande] || typeDemande || "Non précisé";
+
     // E-mail pour TOI (Réception du devis)
     const emailForAdmin = {
       sender: { name: "Page Devis", email: emailExpediteur },
       to: [{ email: emailExpediteur, name: "Aurélien Duberville" }],
       subject: `🔥 Nouvelle demande de devis : ${servicePrincipal}`,
       htmlContent: `
-        
+
           Nouvelle demande de projet
-          
+
+            Type de demande : ${typeDemandeLabel}
             Service demandé : ${servicePrincipal}
             Détail/Format : ${sousChoix}
             Email du client : ${email}
-          
+
           Message :
-          
+
             ${messageFormate}
           
         

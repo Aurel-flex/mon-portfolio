@@ -1,22 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import FadeIn from "@/components/FadeIn";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function DevisPage() {
+// "Type de demande" : segmente les prospects (artisan/formation/autre) pour
+// le tri des emails et le suivi GA4. Pré-sélectionné via ?type=artisan|formation
+// depuis les landing pages dédiées.
+const TYPES_DEMANDE = [
+  { value: "artisan", label: "Site internet (Indépendant / Artisan)" },
+  { value: "formation", label: "Intervention pédagogique (Cours / Formation / Jury)" },
+  { value: "autre", label: "Autre demande" },
+] as const;
+
+function DevisForm() {
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     servicePrincipal: "",
     sousChoix: "",
+    typeDemande: "",
     email: "",
     message: ""
   });
-  
+
+  useEffect(() => {
+    // Synchronise l'état avec un système externe (la query string de l'URL) :
+    // usage légitime d'un effect, cf. le même pattern documenté dans CookieBanner.tsx.
+    const type = searchParams.get("type");
+    if (TYPES_DEMANDE.some((t) => t.value === type)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setFormData((f) => ({ ...f, typeDemande: type as string }));
+    }
+  }, [searchParams]);
+
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   // 🌟 NOUVEAU : Un état pour gérer l'affichage de l'erreur du captcha
   const [captchaError, setCaptchaError] = useState(false);
@@ -90,6 +112,16 @@ export default function DevisPage() {
 
       if (data.success) {
         setIsSuccess(true);
+
+        // Suivi GA4 : segmente les leads par audience (artisan/formation/autre).
+        // gtag n'existe que si le visiteur a accepté les cookies (voir lib/gtag.ts).
+        const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", {
+            lead_type: formData.typeDemande || "autre",
+            source_page: window.location.pathname,
+          });
+        }
       } else {
         alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
@@ -221,7 +253,53 @@ export default function DevisPage() {
                     <span className="transition-transform group-hover:-translate-x-1">←</span> Retour
                   </button>
                   <h2 className="text-2xl font-bold text-center text-brand-light dark:text-brand-dark">Dernière étape : vos coordonnées</h2>
-                  
+
+                  <fieldset className="mt-6">
+                    <legend className="block font-medium mb-3 text-gray-700 dark:text-gray-300">Type de demande *</legend>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {TYPES_DEMANDE.map((type) => {
+                        const isSelected = formData.typeDemande === type.value;
+                        return (
+                          <label
+                            key={type.value}
+                            className={`relative flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all text-sm font-medium focus-within:ring-4 focus-within:ring-brand-light/30 dark:focus-within:ring-brand-dark/30 ${
+                              isSelected
+                                ? "border-brand-light dark:border-brand-dark bg-brand-light/5 dark:bg-brand-dark/5 shadow-sm"
+                                : "border-gray-200 dark:border-gray-700 hover:border-brand-light/50 dark:hover:border-brand-dark/50 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="typeDemande"
+                              value={type.value}
+                              required
+                              checked={isSelected}
+                              onChange={(e) => setFormData({ ...formData, typeDemande: e.target.value })}
+                              className="sr-only"
+                            />
+                            <span
+                              aria-hidden="true"
+                              className={`flex items-center justify-center w-5 h-5 rounded-full border-2 shrink-0 transition-colors ${
+                                isSelected
+                                  ? "border-brand-light dark:border-brand-dark bg-brand-light dark:bg-brand-dark"
+                                  : "border-gray-300 dark:border-gray-600"
+                              }`}
+                            >
+                              {isSelected && (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-3 h-3 text-white dark:text-gray-900">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                              )}
+                            </span>
+                            <span className={isSelected ? "text-gray-900 dark:text-white" : "text-gray-600 dark:text-gray-400"}>
+                              {type.label}
+                            </span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+
                   <div className="grid grid-cols-1 gap-6 mt-6">
                     <div className="relative group">
                       <label className="block font-medium mb-2 text-gray-700 dark:text-gray-300">Votre adresse e-mail *</label>
@@ -290,5 +368,13 @@ export default function DevisPage() {
         </div>
       </FadeIn>
     </main>
+  );
+}
+
+export default function DevisPage() {
+  return (
+    <Suspense fallback={null}>
+      <DevisForm />
+    </Suspense>
   );
 }

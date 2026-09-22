@@ -11,6 +11,8 @@ const routeNames: Record<string, string> = {
   "projets": "Projets",
   "interventions": "Interventions",
   "tarifs": "Tarifs",
+  "creation-site-artisan-independant": "Site pour artisans",
+  "formateur-intervenant-web-agile": "Formateur & intervenant",
   "blog": "Blog",
   "devis": "Devis",
   "contact": "Contact",
