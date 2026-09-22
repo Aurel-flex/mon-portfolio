@@ -87,7 +87,7 @@ const faq = [
   {
     question: "Travaillez-vous avec un CMS ?",
     reponse:
-      "Oui, notamment WordPress, pour vous permettre de gérer votre contenu en toute autonomie une fois le site livré.",
+      "Oui si le besoin nécessite, notamment WordPress, pour vous permettre de gérer votre contenu en toute autonomie une fois le site livré. Je peux également créer un site sur-mesure sans CMS si c'est plus adapté à votre projet. ",
   },
   {
     question: "Proposez-vous un accompagnement après la mise en ligne ?",
