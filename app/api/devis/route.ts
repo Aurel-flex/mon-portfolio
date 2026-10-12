@@ -115,7 +115,10 @@ const emailForClient = {
         },
         body: JSON.stringify(payload),
       });
-      if (!response.ok) throw new Error("Erreur lors de l'envoi vers Brevo");
+      if (!response.ok) {
+        // Brevo indique la cause dans le corps (IP non autorisée, clé invalide, expéditeur non vérifié...)
+        throw new Error(`Brevo ${response.status} : ${await response.text()}`);
+      }
       return response.json();
     };
 
@@ -127,10 +130,10 @@ const emailForClient = {
     return NextResponse.json({ success: true, message: "Emails envoyés avec succès" });
 
   } catch (error) {
+    // Le détail reste dans les logs serveur (Vercel) : il peut contenir l'IP du serveur ou des infos de config
     console.error("🔴 ERREUR SERVEUR GLOBALE :", error);
-    const message = error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
-      { success: false, message: "Erreur : " + message },
+      { success: false, message: "L'envoi de la demande a échoué. Veuillez réessayer plus tard." },
       { status: 500 }
     );
   }
