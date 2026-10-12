@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import FadeIn from "@/components/FadeIn";
@@ -42,6 +42,15 @@ function DevisForm() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   // 🌟 NOUVEAU : Un état pour gérer l'affichage de l'erreur du captcha
   const [captchaError, setCaptchaError] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  // Un jeton reCAPTCHA n'est valable qu'une fois : après un échec il faut en redemander un
+  const failSubmit = (message: string) => {
+    setSubmitError(message);
+    recaptchaRef.current?.reset();
+    setCaptchaToken(null);
+  };
 
   // --- LOGIQUE DE NAVIGATION INTELLIGENTE ---
   const isCreationSite = formData.servicePrincipal === "Création de site internet";
@@ -91,6 +100,7 @@ function DevisForm() {
       return; // On stoppe l'envoi
     }
     
+    setSubmitError(null);
     setIsSubmitting(true);
 
     try {
@@ -101,11 +111,10 @@ function DevisForm() {
       });
 
       if (!response.ok) {
-        const errorText = await response.text(); 
+        const errorText = await response.text();
         console.error("Erreur détaillée du serveur :", errorText);
-        alert("L'API est introuvable ou a rencontré un problème. Regardez la console.");
-        setIsSubmitting(false);
-        return; 
+        failSubmit("Votre demande n'a pas pu être envoyée suite à un problème technique de mon côté.");
+        return;
       }
 
       const data = await response.json();
@@ -123,11 +132,11 @@ function DevisForm() {
           });
         }
       } else {
-        alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+        failSubmit("Votre demande n'a pas pu être envoyée suite à un problème technique de mon côté.");
       }
     } catch (error) {
       console.error("Erreur réseau :", error);
-      alert("Erreur de connexion avec le serveur.");
+      failSubmit("Impossible de joindre le serveur. Vérifiez votre connexion internet puis réessayez.");
     } finally {
       setIsSubmitting(false);
     }
@@ -328,6 +337,7 @@ function DevisForm() {
                   {/* 🌟 NOUVEAU : Bloc reCAPTCHA avec gestion visuelle de l'erreur */}
                   <div className="flex flex-col items-center pt-6">
                     <ReCAPTCHA
+                      ref={recaptchaRef}
                       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                       onChange={(token) => {
                         setCaptchaToken(token);
@@ -341,6 +351,18 @@ function DevisForm() {
                       </p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <div role="alert" className="flex gap-3 p-4 rounded-xl border border-red-200 bg-red-50 text-red-800 text-sm leading-relaxed">
+                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 mt-0.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                      </svg>
+                      <p>
+                        {submitError} Vous pouvez réessayer dans quelques instants ou m'écrire directement à{" "}
+                        <a href="mailto:contact@aurelienduberville.fr" className="font-bold underline underline-offset-2">contact@aurelienduberville.fr</a>.
+                      </p>
+                    </div>
+                  )}
 
                   <div className="pt-8">
                     <button 

@@ -1,24 +1,34 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useRef, useState, FormEvent } from "react";
 import FadeIn from "@/components/FadeIn";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {    
-    e.preventDefault(); 
-    
+  // Un jeton reCAPTCHA n'est valable qu'une fois : après un échec il faut en redemander un
+  const failSubmit = (message: string) => {
+    setSubmitError(message);
+    recaptchaRef.current?.reset();
+    setCaptchaToken(null);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!captchaToken) {
       setCaptchaError(true);
       return;
     }
 
+    setSubmitError(null);
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
@@ -37,8 +47,7 @@ export default function Contact() {
 
       if (!response.ok) {
         console.error("Erreur détaillée du serveur :", await response.text());
-        alert("L'API a rencontré un problème. Regardez la console.");
-        setIsSubmitting(false);
+        failSubmit("Votre message n'a pas pu être envoyé suite à un problème technique de mon côté.");
         return;
       }
 
@@ -47,11 +56,11 @@ export default function Contact() {
       if (data.success) {
         setIsSuccess(true);
       } else {
-        alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+        failSubmit("Votre message n'a pas pu être envoyé suite à un problème technique de mon côté.");
       }
     } catch (error) {
       console.error("Erreur de connexion", error);
-      alert("Erreur réseau. Vérifiez votre connexion internet.");
+      failSubmit("Impossible de joindre le serveur. Vérifiez votre connexion internet puis réessayez.");
     } finally {
       setIsSubmitting(false);
     }
@@ -210,6 +219,7 @@ export default function Contact() {
 
                 <div className="flex flex-col items-center pt-1">
                   <ReCAPTCHA
+                    ref={recaptchaRef}
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                     onChange={(token) => {
                       setCaptchaToken(token);
@@ -222,6 +232,18 @@ export default function Contact() {
                     </p>
                   )}
                 </div>
+
+                {submitError && (
+                  <div role="alert" className="flex gap-3 p-4 rounded-xl border border-red-200 bg-red-50 text-red-800 text-sm leading-relaxed">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 mt-0.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                    <p>
+                      {submitError} Vous pouvez réessayer dans quelques instants ou m'écrire directement à{" "}
+                      <a href="mailto:contact@aurelienduberville.fr" className="font-bold underline underline-offset-2">contact@aurelienduberville.fr</a>.
+                    </p>
+                  </div>
+                )}
 
                 <button 
                   aria-label="Envoyer le message"
