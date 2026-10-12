@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { confirmationEmailHtml } from "@/lib/emailTemplates";
 
 type BrevoEmailPayload = {
   sender: { name: string; email: string };
@@ -80,25 +81,7 @@ const emailForClient = {
   replyTo: { email: emailExpediteur, name: "Aurélien Duberville" },
   to: [{ email: email }],
   subject: "Votre demande a bien été prise en compte",
-  htmlContent: `
-    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-      <p style="margin-bottom: 15px;">Bonjour,</p>
-      
-      <p style="margin-bottom: 15px;">
-        Je vous confirme la bonne réception de votre demande.<br/>
-        Je vais étudier les détails de votre projet avec attention.
-      </p>
-      
-      <p style="margin-bottom: 15px;">
-        Je reviens vers vous très rapidement pour discuter de la suite.
-      </p>
-      
-      <p style="margin-top: 30px;">
-        À très bientôt,<br/>
-        <strong>Aurélien Duberville</strong>
-      </p>
-    </div>
-  `,
+  htmlContent: confirmationEmailHtml(nom),
 };
 
     // Fonction pour envoyer à Brevo
