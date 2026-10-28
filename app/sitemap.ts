@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // On définit ton nom de domaine principal
-  const baseUrl = "https://aurelienduberville.fr";
+  const baseUrl = "https://www.aurelienduberville.fr";
 
   // On retourne un tableau contenant toutes les routes importantes de ton site
   return [
@@ -65,12 +65,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/mentions-legales`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
     },
   ];
 }
