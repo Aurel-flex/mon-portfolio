@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import SupportsCours from "@/components/SupportsCours";
 import type { Metadata } from "next"; // 🌟 Import ajouté
 
 // 🌟 Métadonnées SEO et GEO intégrées directement
@@ -183,6 +184,9 @@ export default function Interventions() {
         </FadeIn>
 
       </div>
+
+      {/* --- APERÇU DES SUPPORTS DE COURS --- */}
+      <SupportsCours />
 
       {/* --- CALL TO ACTION --- */}
       <FadeIn>

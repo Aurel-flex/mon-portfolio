@@ -1,8 +1,13 @@
 "use client";
 
-import { useRef, useState, FormEvent } from "react";
+import { useEffect, useRef, useState, FormEvent } from "react";
 import FadeIn from "@/components/FadeIn";
 import ReCAPTCHA from "react-google-recaptcha";
+
+const SUPPORTS: Record<string, string> = {
+  scrum: "Piloter un projet web en Agilité : les bases de Scrum",
+  communication: "Communiquer dans un projet : réunions, reporting et restitution client",
+};
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,6 +17,21 @@ export default function Contact() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const sujetRef = useRef<HTMLSelectElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  // Pré-remplissage depuis un lien (ex. /contact?sujet=intervention&support=scrum)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sujet = params.get("sujet");
+    if (sujet && sujetRef.current?.querySelector(`option[value="${CSS.escape(sujet)}"]`)) {
+      sujetRef.current.value = sujet;
+    }
+    const support = SUPPORTS[params.get("support") ?? ""];
+    if (support && messageRef.current && !messageRef.current.value) {
+      messageRef.current.value = `Bonjour, je souhaiterais recevoir le support complet du module « ${support} ». Établissement / formation concernée : `;
+    }
+  }, []);
 
   // Un jeton reCAPTCHA n'est valable qu'une fois : après un échec il faut en redemander un
   const failSubmit = (message: string) => {
@@ -193,6 +213,7 @@ export default function Contact() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="sujet" className="font-medium text-gray-900 dark:text-gray-100 text-sm">Sujet de votre message</label>
                   <select 
+                    ref={sujetRef}
                     id="sujet" 
                     name="sujet" 
                     required
@@ -208,6 +229,7 @@ export default function Contact() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="message" className="font-medium text-gray-900 dark:text-gray-100 text-sm">Votre message</label>
                   <textarea 
+                    ref={messageRef}
                     id="message" 
                     name="message" 
                     required 

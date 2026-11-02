@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import SupportsCours from "@/components/SupportsCours";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -109,6 +110,9 @@ export default function FormateurInterventantWebAgile() {
           ))}
         </div>
       </FadeIn>
+
+      {/* --- APERÇU DES SUPPORTS DE COURS --- */}
+      <SupportsCours />
 
       <FadeIn>
         <p className="text-center text-gray-500 dark:text-gray-400 mb-16">
