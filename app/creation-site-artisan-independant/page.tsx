@@ -86,6 +86,8 @@ export default function CreationSiteArtisanIndependant() {
           <Link href="/tarifs" className="text-brand-light dark:text-brand-dark font-bold hover:underline">Consultez mes tarifs</Link>
           {" "}ou{" "}
           <Link href="/projets" className="text-brand-light dark:text-brand-dark font-bold hover:underline">mes réalisations</Link>.
+          {" "}Vous êtes en Seine-et-Marne ?{" "}
+          <Link href="/creation-site-internet-tournan-en-brie" className="text-brand-light dark:text-brand-dark font-bold hover:underline">Exemples de sites par métier à Tournan-en-Brie et alentours</Link>.
         </p>
       </FadeIn>
 

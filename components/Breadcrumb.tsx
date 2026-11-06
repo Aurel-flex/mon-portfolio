@@ -12,6 +12,7 @@ const routeNames: Record<string, string> = {
   "interventions": "Interventions",
   "tarifs": "Tarifs",
   "creation-site-artisan-independant": "Site pour artisans",
+  "creation-site-internet-tournan-en-brie": "Site internet à Tournan-en-Brie",
   "formateur-intervenant-web-agile": "Formateur & intervenant",
   "blog": "Blog",
   "devis": "Devis",

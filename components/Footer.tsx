@@ -16,6 +16,9 @@ export default function Footer() {
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
             Consultant numérique indépendant : Stratégie, création et référencement (SEO) de sites web.
           </p>
+          <Link href="/creation-site-internet-tournan-en-brie" className="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors">
+            Création de site internet à Tournan-en-Brie (77)
+          </Link>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
             © {currentYear} - Tous droits réservés.
           </p>
