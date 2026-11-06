@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Site de démonstration : entreprise fictive, ne pas indexer -->
+<meta name="robots" content="noindex, nofollow">
+<title>Valbrie Toitures, couvreur à Tournan-en-Brie (site de démonstration)</title>
+<meta name="description" content="Site vitrine de démonstration réalisé par Aurélien Duberville pour une entreprise de couverture fictive.">
+<style>
+  :root {
+    --ink: #1c2530;
+    --slate: #2f3e4e;
+    --muted: #5d6b79;
+    --line: #e3e7ec;
+    --bg: #f6f7f9;
+    --terra: #c2562b;
+    --terra-dark: #9e4120;
+    --sand: #f3e6dc;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  .demo-bar { background: var(--ink); color: #dfe5ea; font-size: 13px; text-align: center; padding: 8px 16px; }
+  .demo-bar a { color: #ffb48f; font-weight: 700; }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; text-decoration: none; letter-spacing: -.3px; }
+  .logo svg { width: 38px; height: 38px; }
+  .nav ul { display: flex; gap: 28px; list-style: none; font-size: 15px; font-weight: 600; color: var(--slate); }
+  .nav ul a { text-decoration: none; }
+  .nav ul a:hover { color: var(--terra); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--terra); color: var(--white); font-weight: 700; text-decoration: none; padding: 12px 20px; border-radius: 10px; border: 0; font-size: 15px; cursor: pointer; }
+  .btn:hover { background: var(--terra-dark); }
+  .btn.ghost { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
+  .btn svg { width: 18px; height: 18px; }
+
+  .hero { background: linear-gradient(135deg, var(--slate) 0%, var(--ink) 100%); color: var(--white); position: relative; overflow: hidden; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 72px; padding-bottom: 72px; }
+  .eyebrow { display: inline-block; background: rgba(255,255,255,.1); color: #ffcfb8; font-size: 13px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 20px; }
+  .hero h1 { font-size: 46px; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+  .hero h1 span { color: #ffb48f; }
+  .hero p { font-size: 18px; color: #cfd8e0; margin-bottom: 32px; max-width: 520px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-art { width: 100%; height: auto; }
+  .trust { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 36px; font-size: 14px; color: #cfd8e0; }
+  .trust div { display: flex; align-items: center; gap: 8px; }
+  .trust svg { width: 20px; height: 20px; color: #ffb48f; }
+
+  .urgence { background: var(--sand); border-bottom: 1px solid #ead5c6; }
+  .urgence .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; padding-bottom: 18px; flex-wrap: wrap; }
+  .urgence strong { color: var(--terra-dark); }
+
+  section { padding: 88px 0; }
+  .section-title { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-title h2 { font-size: 34px; letter-spacing: -.6px; margin-bottom: 12px; }
+  .section-title p { color: var(--muted); font-size: 17px; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(28,37,48,.08); }
+  .card .ico { width: 48px; height: 48px; border-radius: 12px; background: var(--sand); color: var(--terra); display: grid; place-items: center; margin-bottom: 18px; }
+  .card .ico svg { width: 26px; height: 26px; }
+  .card h3 { font-size: 19px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 15px; }
+
+  .bg-soft { background: var(--bg); }
+  .realisations { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .real { border-radius: 16px; overflow: hidden; background: var(--white); border: 1px solid var(--line); }
+  .real .pair { display: grid; grid-template-columns: 1fr 1fr; }
+  .real .pair div { aspect-ratio: 1 / 1; position: relative; }
+  .real .pair span { position: absolute; left: 10px; bottom: 10px; background: rgba(28,37,48,.8); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+  .real .info { padding: 18px 20px; }
+  .real .info h3 { font-size: 17px; }
+  .real .info p { color: var(--muted); font-size: 14px; }
+  .avant { background: repeating-linear-gradient(135deg, #8a8f94 0 10px, #7d8287 10px 20px); }
+  .apres-ardoise { background: repeating-linear-gradient(0deg, #3a4653 0 14px, #2f3a46 14px 16px); }
+  .apres-tuile { background: repeating-linear-gradient(0deg, #b9532b 0 14px, #9e4120 14px 16px); }
+  .apres-zinc { background: repeating-linear-gradient(90deg, #9fa9b3 0 22px, #8b96a1 22px 24px); }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+  .step { position: relative; padding: 24px; border-left: 3px solid var(--terra); background: var(--white); border-radius: 0 12px 12px 0; }
+  .step::before { counter-increment: step; content: "0" counter(step); font-size: 32px; font-weight: 800; color: var(--sand); display: block; line-height: 1; margin-bottom: 10px; -webkit-text-stroke: 1px var(--terra); }
+  .step h3 { font-size: 17px; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: 14px; }
+
+  .zone { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .chips span { background: var(--sand); color: var(--terra-dark); font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px; }
+  .map { border-radius: 20px; background: var(--slate); aspect-ratio: 4 / 3; position: relative; overflow: hidden; }
+  .map svg { width: 100%; height: 100%; }
+
+  details { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-bottom: 12px; }
+  summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--terra); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin-top: 10px; }
+  .faq { max-width: 760px; margin: 0 auto; }
+
+  .contact { background: var(--ink); color: var(--white); }
+  .contact .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; }
+  .contact h2 { font-size: 34px; margin-bottom: 16px; }
+  .contact p { color: #cfd8e0; }
+  .coords { margin-top: 28px; display: grid; gap: 14px; }
+  .coords div { display: flex; gap: 12px; align-items: center; }
+  .coords svg { width: 22px; height: 22px; color: #ffb48f; flex-shrink: 0; }
+  form { background: var(--white); color: var(--ink); border-radius: 16px; padding: 28px; display: grid; gap: 14px; }
+  form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  label { font-size: 14px; font-weight: 600; display: grid; gap: 6px; }
+  input, select, textarea { font: inherit; padding: 11px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+  .form-note { font-size: 13px; color: var(--muted); }
+
+  footer { background: #141b23; color: #94a3b0; font-size: 14px; padding: 28px 0; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: #ffb48f; }
+
+  .call-fab { display: none; }
+
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .hero .wrap, .zone, .contact .wrap { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 34px; }
+    .hero-art { max-width: 420px; margin: 0 auto; }
+    .grid-3, .realisations { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    section { padding: 64px 0; }
+    .call-fab { display: inline-flex; position: fixed; right: 16px; bottom: 16px; z-index: 20; box-shadow: 0 10px 24px rgba(194,86,43,.4); border-radius: 999px; }
+  }
+  @media (max-width: 560px) {
+    .steps, form .row { grid-template-columns: 1fr; }
+    .nav .btn span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  Site de démonstration · entreprise fictive · conçu par <a href="https://www.aurelienduberville.fr/creation-site-internet-tournan-en-brie">Aurélien Duberville</a>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="Valbrie Toitures, accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#c2562b"/><path d="M8 22 20 11l12 11" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 21v9h14v-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round"/></svg>
+      Valbrie Toitures
+    </a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#realisations">Réalisations</a></li>
+      <li><a href="#zone">Zone</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#contact" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h3.3a1 1 0 0 1 .95.68l1.5 4.5a1 1 0 0 1-.5 1.2l-2.26 1.13a11 11 0 0 0 5.5 5.5l1.13-2.26a1 1 0 0 1 1.2-.5l4.5 1.5a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
+      <span>Devis gratuit</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Couvreur · Tournan-en-Brie (77)</span>
+        <h1>Votre toit entre de <span>bonnes mains</span>, de la fuite à la rénovation.</h1>
+        <p>Réparation, rénovation et entretien de toitures en tuiles, ardoises et zinc pour les particuliers de Seine-et-Marne. Devis gratuit sous 48 h.</p>
+        <div class="ctas">
+          <a href="#contact" class="btn">Demander un devis</a>
+          <a href="#realisations" class="btn ghost">Voir nos chantiers</a>
+        </div>
+        <div class="trust">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.4 8.6 8 9.9 4.6-1.3 8-4.9 8-9.9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>Garantie décennale</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Devis sous 48 h</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 15 9h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>Artisan depuis 15 ans</div>
+        </div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 420 360" role="img" aria-label="Illustration d'une maison avec une toiture en tuiles">
+        <circle cx="330" cy="70" r="38" fill="#ffb48f" opacity=".85"/>
+        <rect x="70" y="190" width="280" height="150" rx="6" fill="#e9edf1"/>
+        <path d="M40 200 210 70l170 130z" fill="#c2562b"/>
+        <path d="M40 200 210 70l170 130" fill="none" stroke="#9e4120" stroke-width="10" stroke-linejoin="round"/>
+        <g stroke="#9e4120" stroke-width="3" opacity=".55">
+          <path d="M92 160h236M126 134h168M160 108h100"/>
+        </g>
+        <rect x="270" y="88" width="34" height="62" fill="#3a4653"/>
+        <rect x="186" y="262" width="52" height="78" rx="4" fill="#2f3e4e"/>
+        <rect x="100" y="232" width="56" height="46" rx="4" fill="#9fb3c6"/>
+        <rect x="266" y="232" width="56" height="46" rx="4" fill="#9fb3c6"/>
+        <rect x="20" y="338" width="380" height="6" rx="3" fill="#43566a"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="urgence">
+    <div class="wrap">
+      <p><strong>Fuite ou tuiles envolées après un orage ?</strong> Mise hors d'eau rapide dans tout le secteur de Tournan-en-Brie.</p>
+      <a href="#contact" class="btn">Signaler une urgence</a>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Nos services</h2>
+        <p>Un seul interlocuteur pour tous les travaux de votre toiture, du diagnostic au nettoyage du chantier.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z"/></svg></div>
+          <h3>Recherche et réparation de fuite</h3>
+          <p>Diagnostic, remplacement des tuiles cassées, reprise des solins et des noues.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg></div>
+          <h3>Rénovation de toiture</h3>
+          <p>Réfection complète en tuiles ou ardoises, remplacement des liteaux et de l'écran sous-toiture.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+          <h3>Zinguerie et gouttières</h3>
+          <p>Pose et remplacement de gouttières, descentes et habillages en zinc ou aluminium.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M5 12h14M12 4v16"/></svg></div>
+          <h3>Pose de fenêtres de toit</h3>
+          <p>Création ou remplacement de fenêtres de toit pour éclairer vos combles.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h16M6 16l6-10 6 10z"/></svg></div>
+          <h3>Isolation des combles</h3>
+          <p>Isolation par l'extérieur ou sous rampants pour réduire vos dépenses de chauffage.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 21h10M12 17v4M5 3h14l-2 14H7z"/></svg></div>
+          <h3>Démoussage et entretien</h3>
+          <p>Nettoyage, traitement hydrofuge et contrôle annuel pour prolonger la vie du toit.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="realisations" class="bg-soft">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Chantiers récents</h2>
+        <p>Avant / après de quelques interventions dans le secteur.</p>
+      </div>
+      <div class="realisations">
+        <article class="real">
+          <div class="pair"><div class="avant"><span>Avant</span></div><div class="apres-tuile"><span>Après</span></div></div>
+          <div class="info"><h3>Réfection en tuiles mécaniques</h3><p>Maison individuelle · 120 m² · 6 jours</p></div>
+        </article>
+        <article class="real">
+          <div class="pair"><div class="avant"><span>Avant</span></div><div class="apres-ardoise"><span>Après</span></div></div>
+          <div class="info"><h3>Couverture en ardoise naturelle</h3><p>Longère · 90 m² · 8 jours</p></div>
+        </article>
+        <article class="real">
+          <div class="pair"><div class="avant"><span>Avant</span></div><div class="apres-zinc"><span>Après</span></div></div>
+          <div class="info"><h3>Gouttières et habillage zinc</h3><p>Pavillon · 40 ml · 2 jours</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Comment ça se passe ?</h2>
+        <p>Un déroulé simple et transparent, sans surprise sur la facture.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Votre demande</h3><p>Par téléphone ou formulaire, avec quelques photos si possible.</p></div>
+        <div class="step"><h3>Visite sur place</h3><p>Diagnostic de la toiture et conseils, sans engagement.</p></div>
+        <div class="step"><h3>Devis détaillé</h3><p>Envoyé sous 48 h, poste par poste.</p></div>
+        <div class="step"><h3>Chantier propre</h3><p>Travaux, nettoyage et photos de fin de chantier.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zone" class="bg-soft">
+    <div class="wrap zone">
+      <div>
+        <h2 style="font-size:34px;letter-spacing:-.6px;margin-bottom:12px">Zone d'intervention</h2>
+        <p style="color:var(--muted);font-size:17px">Basés à Tournan-en-Brie, nous intervenons dans un rayon d'environ 25 km.</p>
+        <div class="chips">
+          <span>Tournan-en-Brie</span><span>Gretz-Armainvilliers</span><span>Presles-en-Brie</span><span>Ozoir-la-Ferrière</span><span>Roissy-en-Brie</span><span>Fontenay-Trésigny</span><span>Favières</span><span>Châtres</span>
+        </div>
+      </div>
+      <div class="map" role="img" aria-label="Schéma de la zone d'intervention autour de Tournan-en-Brie">
+        <svg viewBox="0 0 400 300" aria-hidden="true">
+          <g stroke="#43566a" stroke-width="1">
+            <path d="M0 60h400M0 120h400M0 180h400M0 240h400M80 0v300M160 0v300M240 0v300M320 0v300"/>
+          </g>
+          <circle cx="200" cy="150" r="120" fill="#c2562b" opacity=".18"/>
+          <circle cx="200" cy="150" r="70" fill="#c2562b" opacity=".25"/>
+          <circle cx="200" cy="150" r="10" fill="#ffb48f"/>
+          <text x="200" y="182" fill="#fff" font-size="15" font-weight="700" text-anchor="middle" font-family="Arial">Tournan-en-Brie</text>
+          <g fill="#cfd8e0" font-size="12" font-family="Arial">
+            <circle cx="150" cy="95" r="4"/><text x="158" y="99">Gretz</text>
+            <circle cx="95" cy="70" r="4"/><text x="103" y="74">Ozoir</text>
+            <circle cx="290" cy="215" r="4"/><text x="298" y="219">Fontenay</text>
+            <circle cx="120" cy="215" r="4"/><text x="128" y="219">Presles</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-title"><h2>Questions fréquentes</h2></div>
+      <div class="faq">
+        <details><summary>Le devis est-il payant ?</summary><p>Non, la visite et le devis sont gratuits et sans engagement.</p></details>
+        <details><summary>Intervenez-vous en urgence ?</summary><p>Oui, pour une fuite ou des dégâts après intempérie, nous assurons une mise hors d'eau rapide dans notre secteur.</p></details>
+        <details><summary>Êtes-vous assurés ?</summary><p>Tous nos travaux sont couverts par une garantie décennale, dont l'attestation est jointe au devis.</p></details>
+        <details><summary>Les aides à la rénovation sont-elles possibles ?</summary><p>Pour l'isolation, certains travaux peuvent ouvrir droit à des aides. Nous vous indiquons les démarches lors de la visite.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div>
+        <h2>Parlons de votre toiture</h2>
+        <p>Décrivez votre besoin, nous vous rappelons sous 24 h ouvrées pour convenir d'une visite.</p>
+        <div class="coords">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h3.3a1 1 0 0 1 .95.68l1.5 4.5a1 1 0 0 1-.5 1.2l-2.26 1.13a11 11 0 0 0 5.5 5.5l1.13-2.26a1 1 0 0 1 1.2-.5l4.5 1.5a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>01 00 00 00 00 (numéro fictif)</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/></svg>Tournan-en-Brie (77220)</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Lun – Ven · 8 h – 18 h</div>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent = 'Formulaire de démonstration : aucun message n’a été envoyé.';">
+        <div class="row">
+          <label>Nom<input type="text" autocomplete="off"></label>
+          <label>Téléphone<input type="tel" autocomplete="off"></label>
+        </div>
+        <label>Type de travaux
+          <select><option>Réparation de fuite</option><option>Rénovation de toiture</option><option>Gouttières / zinguerie</option><option>Autre</option></select>
+        </label>
+        <label>Votre message<textarea rows="4"></textarea></label>
+        <button class="btn" type="submit">Envoyer ma demande</button>
+        <p class="form-note">Site de démonstration : ce formulaire n'envoie rien.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Valbrie Toitures, entreprise fictive créée pour la démonstration</span>
+    <span>Site conçu par <a href="https://www.aurelienduberville.fr">Aurélien Duberville</a></span>
+  </div>
+</footer>
+
+<a href="#contact" class="btn call-fab">Devis gratuit</a>
+
+</body>
+</html>

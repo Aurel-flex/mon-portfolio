@@ -76,6 +76,13 @@ const jsonLd = {
       url: "https://www.aurelienduberville.fr",
       image: "https://www.aurelienduberville.fr/aurelien-photo.webp",
       jobTitle: "Consultant numérique indépendant",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tournan-en-Brie",
+        postalCode: "77220",
+        addressRegion: "Île-de-France",
+        addressCountry: "FR",
+      },
       sameAs: ["https://www.linkedin.com/in/aur%C3%A9lien-d-64276b152/"],
     },
     {

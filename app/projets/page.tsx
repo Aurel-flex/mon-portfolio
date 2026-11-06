@@ -20,7 +20,7 @@ export default function ProjetsHub() {
         
         {/* Section Filtres */}
         <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
-          {["Tous", "Professionnels", "Personnels"].map((cat) => (
+          {["Tous", "Exemples de sites", "Professionnels", "Personnels"].map((cat) => (
             <button
             aria-label={`Filtrer par ${cat}`}
               key={cat}

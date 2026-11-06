@@ -143,7 +143,7 @@ export default function Contact() {
                 <div>
                   <h3 className="font-bold text-lg mb-1">Zone d'intervention</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Paris, Île-de-France & À distance
+                    Tournan-en-Brie (77) et Seine-et-Marne · À distance sur Paris et partout en France
                   </p>
                 </div>
               </div>
