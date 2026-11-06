@@ -8,6 +8,7 @@ const aiguillage = [
     titre: "Indépendant ou artisan ?",
     texte: "Boostez votre visibilité locale avec un site internet sur-mesure, clé en main.",
     cta: "Découvrir l'offre artisans",
+    secondaire: { href: "/creation-site-internet-tournan-en-brie", label: "Près de Tournan-en-Brie ? Voir des exemples par métier" },
     icon: "M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z",
   },
   {
@@ -89,9 +90,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {aiguillage.map((bloc) => (
-              <Link
+              <div
                 key={bloc.href}
-                href={bloc.href}
                 className="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm hover:shadow-lg hover:border-brand-light dark:hover:border-brand-dark hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-brand-light/10 text-brand-light dark:bg-brand-dark/10 dark:text-brand-dark mb-5">
@@ -101,13 +101,25 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-xl mb-2">{bloc.titre}</h3>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">{bloc.texte}</p>
-                <span className="inline-flex items-center gap-2 text-brand-light dark:text-brand-dark font-bold group-hover:underline">
+                {/* Le lien principal couvre toute la carte (after:inset-0), le lien secondaire passe au-dessus */}
+                <Link
+                  href={bloc.href}
+                  className="inline-flex items-center gap-2 text-brand-light dark:text-brand-dark font-bold group-hover:underline after:absolute after:inset-0 after:rounded-3xl"
+                >
                   {bloc.cta}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
-                </span>
-              </Link>
+                </Link>
+                {"secondaire" in bloc && bloc.secondaire && (
+                  <Link
+                    href={bloc.secondaire.href}
+                    className="relative z-10 block mt-3 text-sm text-gray-500 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-dark hover:underline underline-offset-4"
+                  >
+                    {bloc.secondaire.label}
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         </section>
