@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { projets } from '@/data/projets';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // On définit ton nom de domaine principal
@@ -72,5 +73,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.5,
     },
+    // Une entrée par réalisation (générée depuis data/projets.ts)
+    ...projets.map((p) => ({
+      url: `${baseUrl}/realisations/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ];
 }
