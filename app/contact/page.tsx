@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, FormEvent } from "react";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const SUPPORTS: Record<string, string> = {
@@ -88,14 +89,11 @@ export default function Contact() {
 
   return (
     <main className="max-w-5xl mx-auto w-full px-6 pt-10 pb-16">
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center tracking-tight">
-          Me <span className="text-brand-light dark:text-brand-dark">Contacter</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      <PageHero surtitre="Contact" titre={<>Me <span className="text-brand-light dark:text-brand-dark">Contacter</span></>}>
+        <p>
           Une question, un projet de création web ou une proposition d'intervention pédagogique ? Discutons-en !
         </p>
-      </FadeIn>
+      </PageHero>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
         

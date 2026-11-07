@@ -19,10 +19,15 @@ export const metadata: Metadata = {
     default: 'Aurélien Duberville | Consultant numérique indépendant',
     template: '%s | Aurélien Duberville'
   },
+  // Favicon : fenêtre de navigateur violette (même dessin que le logo du menu)
   icons: {
-    icon: '/icon.png', // Le chemin vers ton image
-    shortcut: '/icon.png',
-    apple: '/icon.png', // Très utile pour les iPhone/iPad
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' }, // Navigateurs récents, net à toutes les tailles
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon.ico', sizes: '48x48' }, // Anciens navigateurs
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }], // iPhone / iPad
   },
   description: 'Consultant numérique indépendant : stratégie, création et référencement (SEO) de votre site web. Un seul interlocuteur, du début à la fin. Découvrez mon portfolio et mes articles.',
   keywords: ['Consultant numérique indépendant', 'Création de site web', 'Référencement SEO', 'Stratégie digitale', 'Next.js', 'Éco-conception'],

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function FadeIn({ children }: { children: React.ReactNode }) {
+export default function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +28,7 @@ export default function FadeIn({ children }: { children: React.ReactNode }) {
       // motion-reduce:transition-none désactive l'effet pour les personnes sensibles aux animations
       className={`transition-all duration-1000 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-      }`}
+      } ${className}`}
     >
       {children}
     </div>

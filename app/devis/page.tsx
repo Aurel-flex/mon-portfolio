@@ -147,7 +147,8 @@ function DevisForm() {
       <FadeIn>
         {!isSuccess && (
           <>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-center">
+            <p className="text-sm font-bold uppercase tracking-wider text-brand-light dark:text-brand-dark mb-3 text-center">Devis gratuit</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight leading-[1.08] text-center">
               Démarrons votre <span className="text-brand-light dark:text-brand-dark">projet</span>
             </h1>
 

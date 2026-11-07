@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
+import AppelFinal from "@/components/AppelFinal";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,7 +33,7 @@ const metiers: Metier[] = [
       "Demande de devis avec envoi de photos",
     ],
     formule: "Site vitrine multipage · dès 1 800 €",
-    demo: "/projets/demo-valbrie-toitures",
+    demo: "/realisations/demo-valbrie-toitures",
     icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
   },
   {
@@ -45,7 +47,7 @@ const metiers: Metier[] = [
       "Contenu informatif, dans le respect des règles de communication de la profession",
     ],
     formule: "One page ou multipage · dès 800 €",
-    demo: "/projets/demo-osteo-des-tilleuls",
+    demo: "/realisations/demo-osteo-des-tilleuls",
     icon: "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z",
   },
   {
@@ -196,16 +198,13 @@ export default function CreationSiteTournanEnBrie() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* --- EN-TÊTE --- */}
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center tracking-tight">
-          Création de site internet à <span className="text-brand-light dark:text-brand-dark">Tournan-en-Brie</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+      <PageHero surtitre="Tournan-en-Brie · Seine-et-Marne" titre={<>Création de site internet à <span className="text-brand-light dark:text-brand-dark">Tournan-en-Brie</span></>}>
+        <p>
           Artisan, professionnel de santé, commerçant ou indépendant à Tournan-en-Brie et dans les environs ?
           Consultant web installé ici, je crée des sites internet sur-mesure qui vous rendent visible auprès des
           clients de votre secteur, avec un interlocuteur que vous pouvez rencontrer en personne.
         </p>
-      </FadeIn>
+      </PageHero>
 
       {/* --- ATOUTS LOCAUX --- */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
@@ -318,23 +317,11 @@ export default function CreationSiteTournanEnBrie() {
       </div>
 
       {/* --- CALL TO ACTION --- */}
-      <FadeIn>
-        <div className="bg-brand-light dark:bg-brand-dark rounded-3xl p-8 md:p-12 text-center text-white dark:text-gray-900 flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Un projet de site à Tournan ou aux alentours ?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl">
-            Décrivez-moi votre activité : je vous propose un rendez-vous et un devis gratuit, sans engagement.
-          </p>
-          <Link
-            href="/devis?type=artisan"
-            className="bg-white dark:bg-gray-900 text-brand-light dark:text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
-          >
-            Demander un devis gratuit
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </FadeIn>
+      <AppelFinal
+        titre="Un projet de site à Tournan ou aux alentours ?"
+        texte="Décrivez-moi votre activité : je vous propose un rendez-vous et un devis gratuit, sans engagement."
+        principal={{ href: "/devis?type=artisan", label: "Demander un devis gratuit" }}
+      />
     </main>
   );
 }

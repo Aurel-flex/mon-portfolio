@@ -11,7 +11,7 @@ export default function Footer() {
         {/* --- Colonne de gauche : Identité & Copyright --- */}
         <div className="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
           <p className="font-bold text-gray-900 dark:text-gray-100 text-lg">
-           <span className="text-brand-light dark:text-brand-dark">A</span>urélien <span className="text-brand-light dark:text-brand-dark">D</span>.
+           Aurélien <span className="text-brand-light dark:text-brand-dark">D</span>.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
             Consultant numérique indépendant : Stratégie, création et référencement (SEO) de sites web.
@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="flex flex-col items-center md:items-end gap-4">
           <nav aria-label="Menu du pied de page" className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-sm text-gray-600 dark:text-gray-400 font-medium">
             <Link href="/a-propos" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">À propos</Link>
-            <Link href="/projets" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Projets</Link>
+            <Link href="/realisations" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Réalisations</Link>
             <Link href="/interventions" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Interventions</Link>
             <Link href="/tarifs" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Tarifs</Link>
             <Link href="/contact" className="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Contact</Link>

@@ -1,5 +1,6 @@
 import { client } from "@/sanity/client";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
 import Link from "next/link";
 import Image from "next/image"; // 🌟 1. On importe le composant Image optimisé
 
@@ -43,14 +44,11 @@ export default async function BlogPage() {
   
   return (
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center tracking-tight">
-          Mon <span className="text-brand-light dark:text-brand-dark">Blog</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+      <PageHero surtitre="Blog" titre={<>Mon <span className="text-brand-light dark:text-brand-dark">Blog</span></>}>
+        <p>
           Articles dans lesquels je partage mes réflexions sur l'éco-conception, le développement web et la gestion de projet.
         </p>
-      </FadeIn>
+      </PageHero>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {articles.map((article) => (
@@ -58,7 +56,7 @@ export default async function BlogPage() {
             <Link 
               href={`/blog/${article.slug}`}
               // 🌟 Ajout de overflow-hidden pour que l'image respecte les bords arrondis de la carte
-              className="group flex flex-col bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 overflow-hidden h-full"
+              className="group flex flex-col bg-gray-50 dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden h-full transition-all duration-300 hover:-translate-y-1 hover:border-brand-light dark:hover:border-brand-dark hover:shadow-xl hover:shadow-brand-light/15 dark:hover:shadow-brand-dark/10"
             >
               
               {/* 🌟 3. Le bloc Image de couverture */}
@@ -68,7 +66,7 @@ export default async function BlogPage() {
                     src={article.imageUrl}
                     alt={article.imageAlt || `Image d'illustration pour ${article.title}`}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>

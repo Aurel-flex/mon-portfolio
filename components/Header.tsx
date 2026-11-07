@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
@@ -45,15 +46,18 @@ export default function Header() {
       <div className="flex justify-between items-center">
         
         {/* Ton Logo */}
-        <div className="font-bold text-2xl text-brand-light dark:text-brand-dark z-40">
-          <Link href="/" onClick={closeMenu}>A<span className="text-black dark:text-white">urélien</span> D<span className="text-black dark:text-white">.</span></Link>
+        <div className="font-bold text-xl sm:text-2xl text-brand-light dark:text-brand-dark z-40">
+          <Link href="/" onClick={closeMenu} aria-label="Aurélien Duberville, accueil" className="flex items-center gap-2.5">
+            <Logo className="w-8 h-8 sm:w-9 sm:h-9 shrink-0" />
+            <span className="whitespace-nowrap"><span className="text-black dark:text-white">Aurélien</span> D<span className="text-black dark:text-white">.</span></span>
+          </Link>
         </div>
         
         {/* Navigation Bureau */}
         <nav className="hidden md:flex gap-6 items-center font-medium">
           <Link href="/" className={getLinkClass("/")}>Accueil</Link>
           <Link href="/a-propos" className={getLinkClass("/a-propos")}>À propos</Link>
-          <Link href="/projets" className={getLinkClass("/projets")}>Projets</Link>
+          <Link href="/realisations" className={getLinkClass("/realisations")}>Réalisations</Link>
           <Link href="/interventions" className={getLinkClass("/interventions")}>Interventions</Link>
           <Link href="/tarifs" className={getLinkClass("/tarifs")}>Tarifs</Link>
           <Link href="/blog" className={getLinkClass("/blog")}>Blog</Link>
@@ -152,7 +156,7 @@ export default function Header() {
         <div className="flex flex-col gap-6 p-8 text-lg font-medium overflow-y-auto">
           <Link href="/" onClick={closeMenu} className={getLinkClass("/")}>Accueil</Link>
           <Link href="/a-propos" onClick={closeMenu} className={getLinkClass("/a-propos")}>À propos</Link>
-          <Link href="/projets" onClick={closeMenu} className={getLinkClass("/projets")}>Projets</Link>
+          <Link href="/realisations" onClick={closeMenu} className={getLinkClass("/realisations")}>Réalisations</Link>
           <Link href="/interventions" onClick={closeMenu} className={getLinkClass("/interventions")}>Interventions</Link>
           <Link href="/tarifs" onClick={closeMenu} className={getLinkClass("/tarifs")}>Tarifs</Link>
           <Link href="/blog" onClick={closeMenu} className={getLinkClass("/blog")}>Blog</Link>

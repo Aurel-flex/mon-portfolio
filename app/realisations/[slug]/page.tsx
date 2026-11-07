@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import AppelFinal from "@/components/AppelFinal";
 
 export default async function ProjetDetail({ params }: { params: Promise<{ slug: string }> }) {
   
@@ -20,11 +21,11 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
       <FadeIn>
         
         {/* --- Bouton Retour Stylisé --- */}
-        <Link href="/projets" className="group inline-flex items-center gap-2 text-gray-500 hover:text-brand-light dark:text-gray-400 dark:hover:text-brand-dark font-medium mb-10 transition-colors">
+        <Link href="/realisations" className="group inline-flex items-center gap-2 text-gray-500 hover:text-brand-light dark:text-gray-400 dark:hover:text-brand-dark font-medium mb-10 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Retour aux projets
+          Retour aux réalisations
         </Link>
 
         {/* --- En-tête du projet --- */}
@@ -137,7 +138,7 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
           <h3 className="text-2xl font-bold mb-8">Continuer l'exploration</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {otherprojets.map(op => (
-              <Link key={op.id} href={`/projets/${op.slug}`} className="group p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-brand-light dark:hover:border-brand-dark transition-all shadow-sm hover:shadow-md">
+              <Link key={op.id} href={`/realisations/${op.slug}`} className="group p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-brand-light dark:hover:border-brand-dark transition-all shadow-sm hover:shadow-md">
                 <p className="text-sm text-brand-light dark:text-brand-dark font-medium mb-2">{op.category}</p>
                 <h4 className="font-bold text-xl group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors flex items-center justify-between">
                   {op.title}
@@ -151,6 +152,14 @@ export default async function ProjetDetail({ params }: { params: Promise<{ slug:
         </div>
         
       </FadeIn>
+      <div className="mt-20">
+        <AppelFinal
+          titre="Un projet similaire en tête ?"
+          texte="Parlons de votre site : proposition claire, gratuite et sans engagement."
+          principal={{ href: "/devis", label: "Demander un devis" }}
+          secondaire={{ href: "/contact", label: "Poser une question" }}
+        />
+      </div>
     </main>
   );
 }

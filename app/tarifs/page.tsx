@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
+import AppelFinal from "@/components/AppelFinal";
 import type { Metadata } from "next";
 
 // 🌟 Métadonnées SEO et GEO intégrées directement
@@ -16,7 +18,6 @@ type Offre = {
   fourchette: string;
   delai: string;
   inclus: string[];
-  populaire?: boolean;
 };
 
 // Création et refonte : fourchettes indicatives, le devis précise le prix final
@@ -36,13 +37,13 @@ const offres: Offre[] = [
   },
   {
     titre: "Site vitrine multipage",
-    pourQui: "TPE qui veut un site rapide, léger et éco-conçu",
+    pourQui: "TPE qui veut un site soigné, léger et éco-conçu",
     aPartirDe: "1 800 €",
     fourchette: "1 800 – 3 500 €",
     delai: "3 à 5 semaines",
     inclus: [
       "4 à 8 pages, design sur-mesure",
-      "Code optimisé : chargement rapide, éco-conçu",
+      "Code optimisé, léger et éco-conçu",
       "SEO on-page (balises, structure, maillage)",
       "Formulaire de contact et suivi d'audience",
     ],
@@ -59,7 +60,6 @@ const offres: Offre[] = [
       "Formation à la prise en main (1 à 2 h)",
       "Tutoriel PDF pour les mises à jour courantes",
     ],
-    populaire: true,
   },
   {
     titre: "Refonte de site existant",
@@ -171,7 +171,7 @@ const faq = [
   {
     question: "Travaillez-vous avec un CMS ?",
     reponse:
-      "Oui si le besoin le nécessite, notamment WordPress, pour vous permettre de gérer votre contenu en toute autonomie une fois le site livré. Je peux également créer un site sur-mesure sans CMS, plus léger et plus rapide, si c'est plus adapté à votre projet.",
+      "Oui si le besoin le nécessite, notamment WordPress, pour vous permettre de gérer votre contenu en toute autonomie une fois le site livré. Je peux également créer un site sur-mesure sans CMS, plus léger, si c'est plus adapté à votre projet.",
   },
   {
     question: "Proposez-vous un accompagnement après la mise en ligne ?",
@@ -202,15 +202,12 @@ export default function TarifsPage() {
       />
 
       {/* --- EN-TÊTE --- */}
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center tracking-tight">
-          Tarifs et <span className="text-brand-light dark:text-brand-dark">Prestations</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+      <PageHero surtitre="Tarifs transparents" titre={<>Tarifs et <span className="text-brand-light dark:text-brand-dark">Prestations</span></>}>
+        <p>
           Des fourchettes claires pour estimer votre budget dès maintenant. Chaque devis détaille
           ensuite le prix exact, poste par poste, selon votre projet.
         </p>
-      </FadeIn>
+      </PageHero>
 
       {/* --- CRÉATION & REFONTE : FOURCHETTES --- */}
       <FadeIn>
@@ -223,18 +220,7 @@ export default function TarifsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         {offres.map((offre) => (
           <FadeIn key={offre.titre}>
-            <div
-              className={`relative h-full flex flex-col bg-white dark:bg-gray-900 border rounded-3xl p-8 transition-colors shadow-sm ${
-                offre.populaire
-                  ? "border-2 border-brand-light dark:border-brand-dark"
-                  : "border-gray-200 dark:border-gray-800 hover:border-brand-light dark:hover:border-brand-dark"
-              }`}
-            >
-              {offre.populaire && (
-                <span className="absolute -top-3.5 left-8 bg-brand-light dark:bg-brand-dark text-white dark:text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
-                  Le plus demandé
-                </span>
-              )}
+            <div className="relative h-full flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-brand-light dark:hover:border-brand-dark rounded-3xl p-8 transition-colors shadow-sm">
               <h3 className="text-2xl font-bold mb-1">{offre.titre}</h3>
               <p className="text-sm font-medium text-brand-light dark:text-brand-dark mb-6">{offre.pourQui}</p>
 
@@ -384,23 +370,11 @@ export default function TarifsPage() {
       </div>
 
       {/* --- CALL TO ACTION --- */}
-      <FadeIn>
-        <div className="bg-brand-light dark:bg-brand-dark rounded-3xl p-8 md:p-12 text-center text-white dark:text-gray-900 flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Un projet en tête ?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl">
-            Parlons-en. Vous recevrez un devis gratuit et détaillé, adapté à votre besoin et à votre budget.
-          </p>
-          <Link
-            href="/devis"
-            className="bg-white dark:bg-gray-900 text-brand-light dark:text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
-          >
-            Demander un devis gratuit
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </FadeIn>
+      <AppelFinal
+        titre="Un projet en tête ?"
+        texte="Parlons-en. Vous recevrez un devis gratuit et détaillé, adapté à votre besoin et à votre budget."
+        principal={{ href: "/devis", label: "Demander un devis gratuit" }}
+      />
     </main>
   );
 }

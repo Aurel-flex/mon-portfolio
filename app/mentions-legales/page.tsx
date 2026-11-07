@@ -12,7 +12,8 @@ export default function MentionsLegales() {
   return (
     <main className="max-w-4xl mx-auto w-full px-6 pt-12 md:pt-16 pb-24">
       <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center tracking-tight">
+        <p className="text-sm font-bold uppercase tracking-wider text-brand-light dark:text-brand-dark mb-3 text-center">Informations légales</p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-10 text-center tracking-tight leading-[1.08]">
           Mentions <span className="text-brand-light dark:text-brand-dark">Légales</span>
         </h1>
         

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
+import AppelFinal from "@/components/AppelFinal";
 import SupportsCours from "@/components/SupportsCours";
 import type { Metadata } from "next";
 
@@ -51,16 +53,13 @@ export default function FormateurInterventantWebAgile() {
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
 
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center tracking-tight">
-          Intervenant & <span className="text-brand-light dark:text-brand-dark">Formateur externe</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+      <PageHero surtitre="Formation & enseignement" titre={<>Intervenant & <span className="text-brand-light dark:text-brand-dark">Formateur externe</span></>}>
+        <p>
           Responsable pédagogique en école, université ou bootcamp ? Je recherche des missions d'enseignement
           en gestion de projet Agile, communication et développement web front-end, avec une pédagogie ancrée
           dans la pratique et les cas réels d'entreprise.
         </p>
-      </FadeIn>
+      </PageHero>
 
       {/* --- PILIERS ENSEIGNÉS --- */}
       <FadeIn>
@@ -123,23 +122,11 @@ export default function FormateurInterventantWebAgile() {
         </p>
       </FadeIn>
 
-      <FadeIn>
-        <div className="bg-brand-light dark:bg-brand-dark rounded-3xl p-8 md:p-12 text-center text-white dark:text-gray-900 flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Une mission d'enseignement à pourvoir ?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl">
-            Décrivez-moi votre besoin (niveau, volume horaire, format), je reviens vers vous rapidement.
-          </p>
-          <Link
-            href="/devis?type=formation"
-            className="bg-white dark:bg-gray-900 text-brand-light dark:text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
-          >
-            Me contacter pour une mission d'enseignement
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </FadeIn>
+      <AppelFinal
+        titre="Une mission d'enseignement à pourvoir ?"
+        texte="Décrivez-moi votre besoin (niveau, volume horaire, format), je reviens vers vous rapidement."
+        principal={{ href: "/devis?type=formation", label: "Me contacter pour une mission d'enseignement" }}
+      />
     </main>
   );
 }

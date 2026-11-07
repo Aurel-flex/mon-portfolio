@@ -24,7 +24,7 @@ export function confirmationEmailHtml(nom?: string) {
         <tr>
           <td style="background-color:${VIOLET};padding:28px 32px;">
             <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-              <td style="padding-right:14px;"><img src="${SITE_URL}/icon.png" width="48" height="48" alt="AD" style="display:block;border-radius:10px;border:2px solid #ffffff;"></td>
+              <td style="padding-right:14px;"><img src="${SITE_URL}/apple-icon.png" width="48" height="48" alt="Aurélien Duberville" style="display:block;border-radius:10px;border:2px solid #ffffff;"></td>
               <td>
                 <div style="color:#ffffff;font-size:20px;font-weight:bold;">Aurélien Duberville</div>
                 <div style="color:#ddd6fe;font-size:14px;">Consultant numérique indépendant</div>
@@ -39,7 +39,7 @@ export function confirmationEmailHtml(nom?: string) {
             <p style="margin:0 0 28px;">Je reviens vers vous <strong style="color:${VIOLET};">très rapidement</strong> pour discuter de la suite.</p>
             <table role="presentation" cellpadding="0" cellspacing="0"><tr>
               <td style="background-color:${VIOLET};border-radius:10px;">
-                <a href="${SITE_URL}/projets" style="display:inline-block;padding:12px 24px;color:#ffffff;font-weight:bold;text-decoration:none;font-size:15px;">Découvrir mes réalisations</a>
+                <a href="${SITE_URL}/realisations" style="display:inline-block;padding:12px 24px;color:#ffffff;font-weight:bold;text-decoration:none;font-size:15px;">Découvrir mes réalisations</a>
               </td>
             </tr></table>
           </td>

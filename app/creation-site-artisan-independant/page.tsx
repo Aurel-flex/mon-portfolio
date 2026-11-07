@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
+import AppelFinal from "@/components/AppelFinal";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -47,16 +49,13 @@ export default function CreationSiteArtisanIndependant() {
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
 
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center tracking-tight">
-          Un site internet pour <span className="text-brand-light dark:text-brand-dark">artisans et indépendants</span>
-        </h1>
-        <p className="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+      <PageHero surtitre="Artisans & indépendants" titre={<>Un site internet pour <span className="text-brand-light dark:text-brand-dark">artisans et indépendants</span></>}>
+        <p>
           Vous êtes plombier, coach, consultant, artisan du bâtiment ou toute autre activité indépendante ?
           Un site internet professionnel est souvent ce qui manque pour être visible localement et rassurer vos futurs clients.
           Je m'occupe de tout, de la conception à la mise en ligne — un seul interlocuteur, du début à la fin.
         </p>
-      </FadeIn>
+      </PageHero>
 
       <FadeIn>
         <h2 className="text-3xl font-bold mb-10 text-center tracking-tight">
@@ -85,29 +84,17 @@ export default function CreationSiteArtisanIndependant() {
           Vous voulez voir le détail des formules et des exemples concrets ?{" "}
           <Link href="/tarifs" className="text-brand-light dark:text-brand-dark font-bold hover:underline">Consultez mes tarifs</Link>
           {" "}ou{" "}
-          <Link href="/projets" className="text-brand-light dark:text-brand-dark font-bold hover:underline">mes réalisations</Link>.
+          <Link href="/realisations" className="text-brand-light dark:text-brand-dark font-bold hover:underline">mes réalisations</Link>.
           {" "}Vous êtes en Seine-et-Marne ?{" "}
           <Link href="/creation-site-internet-tournan-en-brie" className="text-brand-light dark:text-brand-dark font-bold hover:underline">Exemples de sites par métier à Tournan-en-Brie et alentours</Link>.
         </p>
       </FadeIn>
 
-      <FadeIn>
-        <div className="bg-brand-light dark:bg-brand-dark rounded-3xl p-8 md:p-12 text-center text-white dark:text-gray-900 flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Prêt à booster votre visibilité ?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl">
-            Décrivez-moi votre activité, je reviens vers vous avec un devis personnalisé et gratuit.
-          </p>
-          <Link
-            href="/devis?type=artisan"
-            className="bg-white dark:bg-gray-900 text-brand-light dark:text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
-          >
-            Demander un devis
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </FadeIn>
+      <AppelFinal
+        titre="Prêt à booster votre visibilité ?"
+        texte="Décrivez-moi votre activité, je reviens vers vous avec un devis personnalisé et gratuit."
+        principal={{ href: "/devis?type=artisan", label: "Demander un devis" }}
+      />
     </main>
   );
 }

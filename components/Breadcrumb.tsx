@@ -8,7 +8,7 @@ const SITE_URL = "https://www.aurelienduberville.fr";
 // Un petit dictionnaire pour traduire les URL en jolis noms avec accents
 const routeNames: Record<string, string> = {
   "a-propos": "À propos",
-  "projets": "Projets",
+  "realisations": "Réalisations",
   "interventions": "Interventions",
   "tarifs": "Tarifs",
   "creation-site-artisan-independant": "Site pour artisans",

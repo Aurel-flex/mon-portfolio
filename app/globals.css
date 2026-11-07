@@ -6,6 +6,32 @@
 @theme {
   --color-brand-light:#6D28D9;
   --color-brand-dark: #A78BFA;
+
+  /* Flottement léger des maquettes de l'accueil */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Alternance des deux sites dans la maquette de l'accueil (le 2e élément est décalé d'une demi-période) */
+  --animate-swap: swap 10s ease-in-out infinite;
+
+  @keyframes swap {
+    0%, 42% { opacity: 1; }
+    50%, 92% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* Défilement continu du bandeau de références (la liste est dupliquée, on glisse de la moitié) */
+  --animate-marquee: marquee 50s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 @layer base {
@@ -16,7 +42,8 @@
   }
 
   body {
-    background-color: #ffffff;
+    /* Blanc cassé légèrement lavande : moins éblouissant que le blanc pur, les cartes blanches ressortent */
+    background-color: #f7f6fb;
     color: #111827;
   }
   

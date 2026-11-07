@@ -3,7 +3,7 @@ export type Project = {
   id: string;
   title: string;
   slug: string;
-  category: "Exemples de sites" | "Professionnels" | "Personnels";
+  category: "Professionnels" | "Personnels";
   tags: string[];
   description: string;
   fullDescription: string;
@@ -13,26 +13,26 @@ export type Project = {
 };
 
 export const projets: Project[] = [
-  // Ordre d'affichage : exemples de sites, puis projets pro, puis personnels
+  // Ordre d'affichage : projets pro (les deux sites de démonstration en tête), puis personnels
   {
     id: "7",
-    title: "Valbrie Toitures (exemple fictif)",
+    title: "Valbrie Toitures",
     slug: "demo-valbrie-toitures",
-    category: "Exemples de sites",
+    category: "Professionnels",
     tags: ["Site vitrine", "Artisan", "HTML / CSS"],
     description: "Site vitrine de démonstration pour un couvreur fictif à Tournan-en-Brie : appel et devis mis en avant, chantiers avant / après, zone d'intervention.",
-    fullDescription: "Valbrie Toitures est une entreprise fictive, imaginée pour montrer ce que je propose à un artisan du bâtiment. Le site est pensé pour l'urgence et la confiance : bouton de devis toujours visible sur mobile, bandeau « fuite après un orage », garantie décennale mise en avant, galerie avant / après, déroulé d'un chantier en 4 étapes et carte de la zone d'intervention autour de Tournan-en-Brie. Site one page, sans CMS, très léger et rapide à charger. Ce type de site correspond à la formule site vitrine présentée sur la page Tarifs.",
+    fullDescription: "Valbrie Toitures est une entreprise fictive, imaginée pour montrer ce que je propose à un artisan du bâtiment. Le site est pensé pour l'urgence et la confiance : bouton de devis toujours visible sur mobile, bandeau « fuite après un orage », garantie décennale mise en avant, galerie avant / après, déroulé d'un chantier en 4 étapes et carte de la zone d'intervention autour de Tournan-en-Brie. Site one page, sans CMS, très léger. Ce type de site correspond à la formule site vitrine présentée sur la page Tarifs.",
     link: "/projets/demos/valbrie-toitures/index.html",
     image: "/projets/demo-valbrie-toitures.webp",
   },
   {
     id: "8",
-    title: "Ostéo des Tilleuls (exemple fictif)",
+    title: "Ostéo des Tilleuls",
     slug: "demo-osteo-des-tilleuls",
-    category: "Exemples de sites",
+    category: "Professionnels",
     tags: ["Site vitrine", "Santé", "HTML / CSS"],
     description: "Site vitrine de démonstration pour un cabinet d'ostéopathie fictif : quand consulter, déroulé d'une séance, infos pratiques et prise de rendez-vous.",
-    fullDescription: "Le Cabinet Ostéo des Tilleuls est un cabinet fictif, imaginé pour montrer ce que je propose à un professionnel de santé. Le ton est informatif et rassurant, dans le respect des règles de communication de la profession : situations où consulter (nourrissons, femmes enceintes, sportifs, seniors…), déroulé d'une séance, tarif et remboursement par les mutuelles, accès PMR, et bouton de prise de rendez-vous prêt à être relié à un agenda en ligne. Design apaisant, typographie lisible, site one page rapide et adapté au mobile.",
+    fullDescription: "Le Cabinet Ostéo des Tilleuls est un cabinet fictif, imaginé pour montrer ce que je propose à un professionnel de santé. Le ton est informatif et rassurant, dans le respect des règles de communication de la profession : situations où consulter (nourrissons, femmes enceintes, sportifs, seniors…), déroulé d'une séance, tarif et remboursement par les mutuelles, accès PMR, et bouton de prise de rendez-vous prêt à être relié à un agenda en ligne. Design apaisant, typographie lisible, site one page adapté au mobile.",
     link: "/projets/demos/osteo-des-tilleuls/index.html",
     image: "/projets/demo-osteo-des-tilleuls.webp",
   },

@@ -1,5 +1,6 @@
-import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import AppelFinal from "@/components/AppelFinal";
+import PageHero from "@/components/PageHero";
 import SupportsCours from "@/components/SupportsCours";
 import type { Metadata } from "next"; // 🌟 Import ajouté
 
@@ -13,32 +14,14 @@ export default function Interventions() {
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
       
       {/* --- EN-TÊTE & PITCH --- */}
-      <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center tracking-tight">
-          Interventions <span className="text-brand-light dark:text-brand-dark">Pédagogiques</span>
-        </h1>
-        
-    
-            <div className="relative max-w-3xl mx-auto mb-12 p-8 md:p-12 bg-gray-50 dark:bg-gray-800/80 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
-          
-          {/* Icône décorative (Guillemets géants en arrière-plan) */}
-          <div className="absolute top-4 left-6 text-brand-light/10 dark:text-brand-dark/10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-            </svg>
-          </div>
-          
-          <div className="relative z-10 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center">
-            <p>
-                       Fort de mon expérience terrain en agence web et au siège d'Orange, j'ai à cœur de transmettre la réalité de nos métiers aux futurs professionnels. 
-
-            </p>
-            <p className="mt-6 font-semibold text-gray-900 dark:text-gray-100">
-            Ayant déjà formé des collaborateurs et accompagné des étudiants en tutorat, je propose aujourd'hui d'animer des modules basés sur la pratique, les cas concrets et les méthodologies réelles utilisées en entreprise.
-            </p>
-          </div>
-        </div>
-      </FadeIn>
+      <PageHero surtitre="Écoles & organismes de formation" titre={<>Interventions <span className="text-brand-light dark:text-brand-dark">Pédagogiques</span></>}>
+        <p>
+          Fort de mon expérience terrain en agence web et au siège d&apos;Orange, j&apos;ai à cœur de transmettre la réalité de nos métiers aux futurs professionnels.
+        </p>
+        <p className="mt-4 font-semibold text-gray-900 dark:text-gray-100">
+          Ayant déjà formé des collaborateurs et accompagné des étudiants en tutorat, je propose d&apos;animer des modules basés sur la pratique, les cas concrets et les méthodologies réelles utilisées en entreprise.
+        </p>
+      </PageHero>
 
       {/* --- LES MODULES (Grille de 4) --- */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
@@ -189,23 +172,11 @@ export default function Interventions() {
       <SupportsCours />
 
       {/* --- CALL TO ACTION --- */}
-      <FadeIn>
-        <div className="bg-brand-light dark:bg-brand-dark rounded-3xl p-8 md:p-12 text-center text-white dark:text-gray-900 flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Un besoin pour vos étudiants ?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl">
-            Ces modules sont adaptables en fonction de vos maquettes pédagogiques (de 1 à plusieurs jours). Discutons de vos attentes et du format le plus adapté pour vos classes.
-          </p>
-          <Link 
-            href="/contact" 
-            className="bg-white dark:bg-gray-900 text-brand-light dark:text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
-          >
-            Discuter d'une intervention
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </FadeIn>
+      <AppelFinal
+        titre="Un besoin pour vos étudiants ?"
+        texte="Ces modules sont adaptables en fonction de vos maquettes pédagogiques (de 1 à plusieurs jours). Discutons de vos attentes et du format le plus adapté pour vos classes."
+        principal={{ href: "/contact?sujet=intervention", label: "Discuter d'une intervention" }}
+      />
 
     </main>
   );

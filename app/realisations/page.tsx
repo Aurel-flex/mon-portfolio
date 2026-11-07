@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image"; // 🌟 Import de l'image
 import { projets } from "@/data/projets";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
+import AppelFinal from "@/components/AppelFinal";
 
 export default function ProjetsHub() {
   const [filter, setFilter] = useState("Tous");
@@ -15,12 +17,15 @@ export default function ProjetsHub() {
 
   return (
     <main className="max-w-5xl mx-auto px-6 pt-12 pb-24">
+      <PageHero surtitre="Portfolio" titre={<>Mes <span className="text-brand-light dark:text-brand-dark">Réalisations</span></>}>
+        <p>Sites vitrines, refontes et projets web : une sélection de ce que j&apos;ai conçu, piloté ou développé.</p>
+      </PageHero>
+
       <FadeIn>
-        <h1 className="text-4xl md:text-5xl font-bold mb-8">Mes <span className="text-brand-light dark:text-brand-dark">Projets</span></h1>
         
         {/* Section Filtres */}
         <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
-          {["Tous", "Exemples de sites", "Professionnels", "Personnels"].map((cat) => (
+          {["Tous", "Professionnels", "Personnels"].map((cat) => (
             <button
             aria-label={`Filtrer par ${cat}`}
               key={cat}
@@ -42,7 +47,7 @@ export default function ProjetsHub() {
         {filteredprojets.map((project) => (
           <FadeIn key={project.id}>
             {/* Le "group" permet d'animer les enfants quand on survole la carte entière */}
-            <Link href={`/projets/${project.slug}`} className="group block bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all">
+            <Link href={`/realisations/${project.slug}`} className="group block bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1 hover:border-brand-light dark:hover:border-brand-dark hover:shadow-xl hover:shadow-brand-light/15 dark:hover:shadow-brand-dark/10">
               
               <div className="aspect-video bg-gray-200 dark:bg-gray-700 relative overflow-hidden">
                 <Image 
@@ -50,7 +55,7 @@ export default function ProjetsHub() {
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover"
                 />
                 {/* 🌟 LE FILTRE VIOLET : Il disparaît (opacity-0) quand on survole (group-hover) */}
                 <div className="absolute inset-0 bg-brand-light/40 dark:bg-brand-dark/40 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0 z-10"></div>
@@ -70,6 +75,15 @@ export default function ProjetsHub() {
             </Link>
           </FadeIn>
         ))}
+      </div>
+
+      <div className="mt-24">
+        <AppelFinal
+          titre="Votre site pourrait être le prochain"
+          texte="Décrivez-moi votre activité : vous recevez une proposition claire, gratuite et sans engagement."
+          principal={{ href: "/devis", label: "Demander un devis" }}
+          secondaire={{ href: "/tarifs", label: "Voir les tarifs" }}
+        />
       </div>
     </main>
   );
